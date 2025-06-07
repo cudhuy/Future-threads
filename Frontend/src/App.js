@@ -2,7 +2,7 @@ import './App.css';
 import Filter from './home/filter.jsx';
 import { useState, useEffect } from 'react';
 import Event from './timeline/event.jsx';
-import LoadMoreButton from './timeline/LoadMoreButton.jsx';
+import LoadMoreButton from './timeline/loadMoreButton.jsx';
 
 const App = () => {
     const [events, setEvents] = useState([]);
