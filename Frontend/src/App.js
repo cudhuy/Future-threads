@@ -30,29 +30,27 @@ const App = () => {
     }, []);
 
     return (
-        <div className="flex items-center justify-center flex-col bg-black p-4">
-            <Filter/>
+			<div className='flex items-center justify-center flex-col bg-black p-4'>
+				<Filter />
 
-            <div className="font-sans bg-gray-100 min-h-screen flex flex-col">
-                <header className="bg-gray-800 text-white text-xl text-center py-4">
-                    <h1>Future Threads Timeline</h1>
-                </header>
+				{/* Timeline Container */}
+				<div className='relative w-full md:w-2/3'>
+					{/* Vertical Timeline Line */}
+					<div className='absolute top-0 left-1/2 transform -translate-x-1/2 w-1 bg-gray-300 h-full z-0'></div>
 
-                <div className="timeline relative max-w-5xl mx-auto py-8">
-                    <div className="timeline-line absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-full bg-gray-800"></div>
-                    {events.map((event, index) => (
-                        <Event key={index} event={event} side={index % 2 === 0 ? 'left' : 'right'} />
-                    ))}
-                </div>
+						{events.map((event, index) => (
+							<Event
+								key={index}
+								event={event}
+								side={index % 2 === 0 ? 'left' : 'right'}
+							/>
+						))}
+					</div>
 
-                <LoadMoreButton onClick={loadEvents} />
+					<LoadMoreButton onClick={loadEvents} />
 
-                <footer className="bg-gray-800 text-white text-center py-4">
-                    <p>&copy; 2025 Future Threads. All rights reserved.</p>
-                </footer>
-            </div>
-        </div>
-    );
+			</div>
+		);
 };
 
 export default App;
