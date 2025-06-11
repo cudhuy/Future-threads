@@ -30,6 +30,8 @@ const Event = ({ event, side }) => {
 				)}
 				<small className='text-gray-500'>{event.date}</small>
 			</div>
+
+			{/* Circle indicator */}
 			<div
 				className={`absolute top-0 ${
 					side === 'left' ? 'left-[-12px]' : 'right-[-12px]'
