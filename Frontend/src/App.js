@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/home/home';
 import Event from './pages/event/eventInformation';
 import Layout from './pages/layout';
-import NoPage from './pages/nopages/noPage';
+import NoPage from './pages/nopage/noPage';
 
 function App() {
 	return (
