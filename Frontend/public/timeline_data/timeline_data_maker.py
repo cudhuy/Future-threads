@@ -1,6 +1,5 @@
 import json
 
-
 # title
 # description
 # image - a url of the image being used
@@ -36,9 +35,6 @@ import json
 # 0.8 - all humans would be aware of this, some, e.g. 1 country greatly effected, e.g. large scale war between 2 countries like russia/ukraine
 # 0.9 - all humans are somewhat effected, e.g. world war
 # 1.0 - huge effect to all humanity, e.g. nuclear war
-
-
-
 
 all_tags = [
     "AI",
@@ -117,6 +113,7 @@ data = [
     {"title": "Cure for Cancer",
      "description": "cure_for_cancer.jpg",
      "image": "",
+     "source":[],
      "optimism": [{"lowerBound": 0,
                   "upperBound": 1}],
      "dateRange": {"earliestYear": 2025,
@@ -137,7 +134,7 @@ data = [
      "isPositive": False,
      "tags": ["Environment"],
      },
-
+]
 
 """
     {"title": "",
@@ -153,8 +150,6 @@ data = [
      "tags": [],
      },
  """
-]
-
 
 def test_date_filter(optimism, entry):
     """
@@ -165,8 +160,13 @@ def test_date_filter(optimism, entry):
     :param entry: an entry of the data, with an optimism and dateRange attribute
     :return: int year, the year of the event to occur
     """
-    return 0
-
+    if optimism < entry["optimism"][0]["lowerBound"]:
+        return entry["dateRange"]["earliestYear"]
+    elif optimism > entry["optimism"][0]["upperBound"]:
+        return entry["dateRange"]["latestYear"]
+    else:
+        # If optimism is within the bounds, interpolate the year
+        return int(entry["dateRange"]["earliestYear"] + (entry["dateRange"]["latestYear"] - entry["dateRange"]["earliestYear"]) * ((optimism - entry["optimism"][0]["lowerBound"]) / (entry["optimism"][0]["upperBound"] - entry["optimism"][0]["lowerBound"])))
 
 with open("timeline_data.json","w") as f:
     json.dump(data, f)

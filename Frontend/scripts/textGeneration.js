@@ -3,7 +3,7 @@
 	options: {optimism: int 0-10, genres: [{name: string, amount: int 0-10}}]
 	returns: string of the text
 */
-function generateText(category, options) {
+function GenerateText(category, options) {
 	return 'todo';
 }
-export default generateText;
+export default GenerateText;

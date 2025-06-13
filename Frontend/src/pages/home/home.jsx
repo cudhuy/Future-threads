@@ -3,21 +3,72 @@ import Filter from './filter/filter';
 import Event from './timeline/event';
 import LoadMoreButton from './timeline/loadMoreButton';
 
+const getEntryDate = (entry, optimism) => {
+	for (let optimismRange of entry['optimism']) {
+		if (
+			optimismRange['lowerBound'] <= optimism &&
+			optimism <= optimismRange['upperBound']
+		) {
+			let range = optimismRange['upperBound'] - optimismRange['lowerBound'];
+			let terp = (optimism - optimismRange['lowerBound']) / range;
+			if (entry['isPositive']) {
+				terp = 1 - terp;
+			}
+			let year =
+				entry['dateRange']['earliestYear'] +
+				terp *
+					(entry['dateRange']['latestYear'] -
+						entry['dateRange']['earliestYear']);
+			return Math.round(year);
+		}
+	}
+	return null;
+};
+
+const getJson = (relevanceMinimum, tags, optimism) => {
+	return fetch('timeline_data/timeline_data.json')
+		.then((response) => response.json())
+		.then((data) => {
+			let output = [];
+			for (let entry of data) {
+				let year = getEntryDate(entry, optimism);
+				if (
+					entry['relevance'] >= relevanceMinimum &&
+					(entry['tags'].some((tag) => tags.includes(tag)) ||
+						tags.includes('All')) &&
+					year !== null
+				) {
+					output.push({
+						title: entry['title'],
+						date: year,
+						image: 'images/' + entry['image'],
+						url: entry['source'].length > 0 ? entry['source'][0] : null,
+						content: entry['description'],
+					});
+				}
+			}
+			output.sort((a, b) => a.date - b.date);
+			console.log('all events', output);
+			return output;
+		});
+};
+
 const Home = () => {
 	const [events, setEvents] = useState([]);
 	const [loadedEvents, setLoadedEvents] = useState(0);
-	const eventsPerLoad = 6;
+	const [allEvents, setAllEvents] = useState([]);
+	const eventsPerLoad = 3;
 
-	const allEvents = Array.from({ length: 100 }, (_, i) => ({
-		title: `Event Title ${i + 1}`,
-		date: `2025-0${(i % 12) + 1}-01`,
-		image:
-			i % 3 === 0
-				? `https://via.placeholder.com/150?text=Event+${i + 1}`
-				: null,
-		url: i % 4 === 0 ? `https://example.com/event-${i + 1}` : null,
-		content: `Description for event ${i + 1}. Lorem ipsum dolor sit amet...`,
-	}));
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await getJson(0, ['All'], 0.8);
+			setAllEvents(result);
+			setEvents(result.slice(0, eventsPerLoad));
+			setLoadedEvents(eventsPerLoad);
+		};
+
+		fetchData();
+	}, []);
 
 	const loadEvents = () => {
 		setEvents((prevEvents) => [
