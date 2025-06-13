@@ -115,27 +115,24 @@
     ]
   },
   {
-    "title": "Cure for Cancer",
-    "description": "cure_for_cancer.jpg",
-    "image": "",
-    "source": [],
-    "optimism": [
-      {
-        "lowerBound": 0,
-        "upperBound": 1
-      }
-    ],
-    "dateRange": {
-      "earliestYear": 2025,
-      "latestYear": 2050
-    },
-    "relevance": 0.75,
-    "isPositive": true,
-    "tags": [
-      "Medicine",
-      "Science"
-    ]
-  },
+		"title": "Cure for Cancer",
+		"description": "Cancer is a complex group of diseases with over 100 types, each with unique behaviors and genetic profiles. A universal cure is difficult, but not impossible.",
+		"image": "cure_for_cancer.jpg",
+		"source": [],
+		"optimism": [
+			{
+				"lowerBound": 0,
+				"upperBound": 1
+			}
+		],
+		"dateRange": {
+			"earliestYear": 2025,
+			"latestYear": 2050
+		},
+		"relevance": 0.75,
+		"isPositive": true,
+		"tags": ["Medicine", "Science"]
+	},
   {
     "title": "Exceed 2\u00b0C",
     "description": "Crossing the 2\u00b0C threshold above pre-industrial levels marks a dangerous point in climate change. This level of warming could lead to some irreversible impacts to the planet.",
