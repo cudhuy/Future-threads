@@ -42,9 +42,10 @@ app.post('/api/chat', async (req, res) => {
 
 		if (provider === 'google') {
 			const result = await geminiModel.generateContent([message]);
+			console.log(result.response.text());
 			botMessage = result.response.text();
 		} else {
-			const response = await openaiClient.createChatCompletion({
+			const response = await openai.createChatCompletion({
 				model: chatgptModel,
 				messages: [{ role: 'user', content: message }],
 			});
