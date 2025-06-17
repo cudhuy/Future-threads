@@ -1,24 +1,26 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const openai = require('openai');
-const { GoogleGenAI } = require('@google/genai');
+const { OpenAI } = require('openai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 // Load environment variables from .env file
 dotenv.config();
 
 // Initialize OpenAI with API key from environment variables
-const openai = new openai.OpenAIApi({
+const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
 });
 
 // Initialize Google Generative AI with API key from environment variables
-const googleGenAI = new GoogleGenAI({
+const googleGenAI = new GoogleGenerativeAI({
 	apiKey: process.env.GOOGLE_API_KEY,
 });
 
 // Define the AI models to use
-const geminiModel = googleGenAI.getModel('gemini-1.5-flash'); // Google Gemini model name
+const geminiModel = googleGenAI.getGenerativeModel({
+	model: 'gemini-1.5-flash',
+}); // Google Gemini model name
 const chatgptModel = 'gpt-3.5-turbo'; // OpenAI ChatGPT model name
 
 // Initialize Express application
