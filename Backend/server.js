@@ -38,7 +38,7 @@ app.post('/api/chat', async (req, res) => {
 	if (!message || typeof message !== 'string') {
 		return res.status(400).json({ error: 'Invalid message format' });
 	}
-
+	
 	try {
 		let botMessage = '';
 
