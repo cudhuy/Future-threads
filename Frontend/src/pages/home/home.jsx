@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import Filter from './filter/filter';
-import Event from './timeline/event';
-import LoadMoreButton from './timeline/loadMoreButton';
+import Filter from './filter/filter.jsx';
+import React, { useState, useEffect } from 'react';
+import Event from './timeline/Event';
+import LoadMoreButton from './timeline/LoadMoreButton';
 
 const getEntryDate = (entry, optimism) => {
 	for (let optimismRange of entry['optimism']) {
@@ -57,6 +57,7 @@ const Home = () => {
 	const [events, setEvents] = useState([]);
 	const [loadedEvents, setLoadedEvents] = useState(0);
 	const [allEvents, setAllEvents] = useState([]);
+	const [showMoreButton, setShowMoreButton] = useState(true);
 	const eventsPerLoad = 3;
 
 	useEffect(() => {
@@ -76,6 +77,11 @@ const Home = () => {
 			...allEvents.slice(loadedEvents, loadedEvents + eventsPerLoad),
 		]);
 		setLoadedEvents(loadedEvents + eventsPerLoad);
+
+		console.log(allEvents.length);
+		if (loadedEvents >= allEvents.length && allEvents.length != 0) {
+			setShowMoreButton(false);
+		}
 	};
 
 	useEffect(() => {
@@ -100,7 +106,7 @@ const Home = () => {
 				))}
 			</div>
 
-			<LoadMoreButton onClick={loadEvents} />
+			{showMoreButton && <LoadMoreButton onClick={loadEvents} />}
 		</div>
 	);
 };
