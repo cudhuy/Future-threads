@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const { OpenAI } = require('openai');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const getAudioPath = require('./voiceGen');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -59,6 +60,12 @@ app.post('/api/chat', async (req, res) => {
 		console.error('Error calling AI API:', error.message);
 		res.status(500).json({ error: 'Failed to process the request' });
 	}
+});
+
+// Endpoint to handle voice generation requests
+app.get('/api/voice/:title', async (req, res) => {
+	const audioPath = await getAudioPath(req.params.title);
+	res.sendFile(audioPath);
 });
 
 // Start the server
