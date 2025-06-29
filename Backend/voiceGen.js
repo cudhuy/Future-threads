@@ -1,18 +1,18 @@
-// provided title, description
+// Provided title, description
 
-// what format / easiest to play
+// What format / easiest to play
 
 const fs = require('fs');
 const { createClient, toWav } = require('@neuphonic/neuphonic-js');
 const dotenv = require('dotenv');
-const { readFile } = require('node:fs/promises');
+const path = require('path');
 
 dotenv.config();
 
 const client = createClient({ apiKey: process.env.NEUPHONICS_API });
-
 const outputDir = 'voiceFiles';
 
+// Returns a description string based on the provided title
 function descriptionFromTitle(title) {
 	const testDescriptions = {
 		meow: 'Cats!!!!',
@@ -22,6 +22,7 @@ function descriptionFromTitle(title) {
 	return testDescriptions[title];
 }
 
+// Generates speech audio (wav) from a text description using Neuphonic API
 async function generateText(description) {
 	const sse = await client.tts.sse({
 		speed: 1.15,
@@ -34,12 +35,11 @@ async function generateText(description) {
 	return toWav(res.audio);
 }
 
-async function getAudio(title) {
+// Gets the audio file path for a given title, generates and saves the audio if it doesn't exist
+async function getAudioPath(title) {
 	if (fs.existsSync(outputDir + `/${title}.wav`)) {
 		// exists already
 		console.log('title exists already for voice');
-		const wav = await readFile(outputDir + `/${title}.wav`);
-		return new Uint8Array(wav);
 	} else {
 		// generate file and save it for future use
 		console.log('title doesnt exist for voice');
@@ -47,13 +47,8 @@ async function getAudio(title) {
 		console.log('content is generated');
 
 		fs.writeFileSync(outputDir + `/${title}.wav`, wav);
-		return wav;
 	}
+	return path.join(__dirname, outputDir + `/${title}.wav`);
 }
 
-(async () => {
-	await getAudio('meow');
-	await new Promise((r) => setTimeout(r, 10000)); // wait for time
-})().catch((e) => {
-	// Deal with the fact the chain failed
-});
+module.exports = getAudioPath;
