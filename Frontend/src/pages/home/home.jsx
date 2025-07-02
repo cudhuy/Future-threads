@@ -1,5 +1,5 @@
 import Filter from './filter/filter.jsx';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Event from './timeline/Event';
 import LoadMoreButton from './timeline/LoadMoreButton';
 

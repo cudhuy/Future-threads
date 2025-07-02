@@ -1,4 +1,4 @@
-import './statsBar.css';
+import styles from './statsBar.module.css';
 
 const statIcons = {
 	military: '⚔️',
@@ -17,20 +17,20 @@ export default function StatsBar({ stats }) {
 		economy: '#9c88ff',
 	};
 	return (
-		<div className='stats-bar'>
+		<div className={styles.statsBar}>
 			{Object.entries(stats).map(([stat, value]) => (
-				<div key={stat} className='stat-item'>
-					<div className='stat-header'>
-						<span className='stat-icon'>{statIcons[stat]}</span>
-						<span className='stat-label'>{stat.toUpperCase()}</span>
+				<div key={stat} className={styles.statItem} data-stat={stat}>
+					<div className={styles.statHeader}>
+						<span className={styles.statIcon}>{statIcons[stat]}</span>
+						<span className={styles.statLabel}>{stat.toUpperCase()}</span>
 					</div>
-					<div className='stat-bar-container'>
+					<div className={styles.statBarContainer}>
 						<div
-							className='stat-bar'
+							className={styles.statBar}
 							style={{ width: `${value}%`, backgroundColor: statColors[stat] }}
 						/>
 					</div>
-					<span className='stat-value'>{value}/100</span>
+					<span className={styles.statValue}>{value}/100</span>
 				</div>
 			))}
 		</div>

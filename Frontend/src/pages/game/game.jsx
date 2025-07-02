@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import StatsBar from './components/statsBar';
-import EventDisplay from './components/eventDisplay';
-import CardsDeck from './components/cardsDeck';
-import RandomEventPopup from './components/randomEventPopup';
+import StatsBar from './components/statsBar.jsx';
+import EventDisplay from './components/eventDisplay.jsx';
+import CardsDeck from './components/cardsDeck.jsx';
+import RandomEventPopup from './components/randomEventPopup.jsx';
 import { gameEvents } from '../../data/gameEvents';
-import './Game.css';
+import styles from './Game.module.css';
 
 export default function Game() {
 	const [stats, setStats] = useState({
@@ -45,7 +45,7 @@ export default function Game() {
 	};
 
 	return (
-		<div className='game-container'>
+		<div className={styles.gameContainer}>
 			<StatsBar stats={stats} />
 			<EventDisplay text={currentEvent.text} />
 			{!randomEvent ? (
