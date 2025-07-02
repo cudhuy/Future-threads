@@ -177,7 +177,8 @@ getJson().then(() => {
 	app.listen(PORT, () => {
 		console.log(`Server is running on port ${PORT}`);
 	});
-	
+});
+
 // Endpoint to handle voice generation requests
 app.get('/api/voice/:title', async (req, res) => {
 	const audioPath = await getAudioPath(req.params.title);
