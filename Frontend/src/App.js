@@ -1,74 +1,11 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 import Home from './pages/home/home';
 import Event from './pages/event/eventInformation';
 import Layout from './pages/layout';
-import Test from './pages/apitest/test';
 import NoPage from './pages/nopage/noPage';
-import StatsBar from './pages/game/components/statsBar';
-import EventDisplay from './pages/game/components/eventDisplay';
-import CardsDeck from './pages/game/components/cardsDeck';
-import RandomEventPopup from './pages/game/components/randomEventPopup';
-import { gameEvents } from './data/gameEvents';
+import GameUI from './pages/game/GameUI';
 
-// Game Component from App1.js
-function Game() {
-	const [stats, setStats] = useState({
-		military: 50,
-		politics: 50,
-		environment: 50,
-		qualityOfLife: 50,
-		economy: 50,
-	});
-	const [currentEvent, setCurrentEvent] = useState(gameEvents[0]);
-	const [selectedCard, setSelectedCard] = useState(null);
-	const [randomEvent, setRandomEvent] = useState(null);
-
-	const handleCardClick = (card) => {
-		setSelectedCard(card);
-		setTimeout(() => {
-			setStats((prev) => {
-				const newStats = { ...prev };
-				Object.keys(card.effects).forEach((stat) => {
-					newStats[stat] = Math.max(
-						0,
-						Math.min(100, prev[stat] + card.effects[stat]),
-					);
-				});
-				return newStats;
-			});
-			setTimeout(() => {
-				setRandomEvent('Citizens react to your decision!');
-				setCurrentEvent(
-					gameEvents[Math.floor(Math.random() * gameEvents.length)],
-				);
-				setSelectedCard(null);
-			}, 1000);
-		}, 500);
-	};
-
-	return (
-		<div className='game-container'>
-			<StatsBar stats={stats} />
-			<EventDisplay text={currentEvent.text} />
-			{!randomEvent ? (
-				<CardsDeck
-					cards={currentEvent.cards}
-					onCardClick={handleCardClick}
-					selectedCardId={selectedCard?.id}
-				/>
-			) : (
-				<RandomEventPopup
-					event={randomEvent}
-					onClose={() => setRandomEvent(null)}
-				/>
-			)}
-		</div>
-	);
-}
-
-// Main App Component with Routing
 function App() {
 	return (
 		<BrowserRouter>
@@ -76,8 +13,7 @@ function App() {
 				<Route path='/' element={<Layout />}>
 					<Route index element={<Home />} />
 					<Route path='event/:info' element={<Event />} />
-					<Route path='test' element={<Test />} />
-					<Route path='game' element={<Game />} />
+					<Route path='game' element={<GameUI />} />
 					<Route
 						path='*'
 						element={<NoPage onclick={() => window.history.back()} />}
