@@ -35,7 +35,8 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-eventData = null;
+let eventData = null;
+let gameManager = null;
 
 // Loads timeline data from the JSON file asynchronously
 const getJson = async () => {
@@ -177,6 +178,7 @@ getJson().then(() => {
 	app.listen(PORT, () => {
 		console.log(`Server is running on port ${PORT}`);
 	});
+	gameManager = new GameManagerClass(eventData);
 });
 
 // Endpoint to handle voice generation requests
