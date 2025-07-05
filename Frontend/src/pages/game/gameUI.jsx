@@ -18,6 +18,7 @@ function GameUI() {
 	const [currentEvent, setCurrentEvent] = useState(gameEvents[0]);
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [randomEvent, setRandomEvent] = useState(null);
+	const [eventsHappened, setEventsHappened] = useState([]);
 
 	const handleCardClick = (card) => {
 		setSelectedCard(card);
@@ -42,6 +43,7 @@ function GameUI() {
 				setCurrentEvent(
 					gameEvents[Math.floor(Math.random() * gameEvents.length)],
 				);
+				setEventsHappened((prev) => [...prev, currentEvent]);
 				setSelectedCard(null);
 			}, 1000);
 		}, 500);
@@ -50,7 +52,7 @@ function GameUI() {
 	return (
 		<div className='game-container'>
 			<StatsBar stats={stats} />
-			<EventDisplay text={currentEvent.text} />
+			<EventDisplay eventsOccured={eventsHappened} />
 
 			{!randomEvent ? (
 				<CardsDeck
