@@ -60,8 +60,8 @@ data = [
      "requirements":[],
      "baseProbability":3,
      "statRanges":{
-        "politics":{"min":20,"max":100,"probabilitySwing":"neutral"},
-        "economy":{"min":50,"max":100,"probabilitySwing":"positive"},
+        "politics":{"min":20,"max":100,"probabilitySwing":0},
+        "economy":{"min":50,"max":100,"probabilitySwing":1},
         },
      "statEffects":{
          "qualityOfLife":{"change":10,"range":5},
@@ -84,12 +84,12 @@ data = [
       "politics": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 40,
         "max": 90,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       }
     },
     "statEffects": {
@@ -119,12 +119,12 @@ data = [
             "politics": {
                 "min": 40,
                 "max": 90,
-                "probabilitySwing": "positive"
+                "probabilitySwing": 1
             },
             "economy": {
                 "min": 50,
                 "max": 100,
-                "probabilitySwing": "neutral"
+                "probabilitySwing": 0
             }
         },
         "statEffects": {
@@ -159,7 +159,7 @@ data = [
             "economy": {
                 "min": 30,
                 "max": 100,
-                "probabilitySwing": "positive"
+                "probabilitySwing": 1
             }
         },
         "statEffects": {
@@ -189,12 +189,12 @@ data = [
             "politics": {
                 "min": 30,
                 "max": 90,
-                "probabilitySwing": "neutral"
+                "probabilitySwing": 0
             },
             "economy": {
                 "min": 60,
                 "max": 100,
-                "probabilitySwing": "positive"
+                "probabilitySwing": 1
             }
         },
         "statEffects": {
@@ -224,12 +224,12 @@ data = [
                 "politics": {
                     "min": 40,
                     "max": 90,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "economy": {
                     "min": 50,
                     "max": 90,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 }
             },
             "statEffects": {
@@ -259,12 +259,12 @@ data = [
             "politics": {
                 "min": 10,
                 "max": 70,
-                "probabilitySwing": "negative"
+                "probabilitySwing": -1
             },
             "economy": {
                 "min": 20,
                 "max": 80,
-                "probabilitySwing": "negative"
+                "probabilitySwing": -1
             }
         },
         "statEffects": {
@@ -295,27 +295,27 @@ data = [
       "politics": {
         "min": 40,
         "max": 90,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "economy": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 50,
         "max": 80,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -345,27 +345,27 @@ data = [
       "politics": {
         "min": 20,
         "max": 60,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "economy": {
         "min": 20,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "environment": {
         "min": 50,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
@@ -399,27 +399,27 @@ data = [
       "politics": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "economy": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "environment": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 5,
         "max": 20,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
@@ -449,27 +449,27 @@ data = [
       "politics": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "economy": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "environment": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "qualityOfLife": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
@@ -499,27 +499,27 @@ data = [
       "politics": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "economy": {
         "min": 20,
         "max": 60,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "environment": {
         "min": 50,
         "max": 100,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "military": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "qualityOfLife": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
@@ -553,27 +553,27 @@ data = [
       "politics": {
         "min": 30,
         "max": 70,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "environment": {
         "min": 10,
         "max": 50,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "qualityOfLife": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -604,27 +604,27 @@ data = [
                 "politics": {
                     "min": 40,
                     "max": 90,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "economy": {
                     "min": 30,
                     "max": 60,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "environment": {
                     "min": 20,
                     "max": 50,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "military": {
                     "min": 20,
                     "max": 50,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 },
                 "qualityOfLife": {
                     "min": 60,
                     "max": 100,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 }
             },
             "statEffects": {
@@ -654,27 +654,27 @@ data = [
                 "politics": {
                     "min": 60,
                     "max": 100,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "economy": {
                     "min": 40,
                     "max": 70,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "environment": {
                     "min": 50,
                     "max": 100,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "military": {
                     "min": 10,
                     "max": 30,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 },
                 "qualityOfLife": {
                     "min": 60,
                     "max": 100,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 }
             },
             "statEffects": {
@@ -704,27 +704,27 @@ data = [
                 "politics": {
                     "min": 30,
                     "max": 70,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 },
                 "economy": {
                     "min": 20,
                     "max": 60,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 },
                 "environment": {
                     "min": 10,
                     "max": 40,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "military": {
                     "min": 10,
                     "max": 30,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "qualityOfLife": {
                     "min": 20,
                     "max": 50,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 }
             },
             "statEffects": {
@@ -754,27 +754,27 @@ data = [
                 "politics": {
                     "min": 30,
                     "max": 70,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 },
                 "economy": {
                     "min": 20,
                     "max": 50,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "environment": {
                     "min": 10,
                     "max": 30,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "military": {
                     "min": 50,
                     "max": 90,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "qualityOfLife": {
                     "min": 10,
                     "max": 40,
-                    "probabilitySwing": "negative"
+                    "probabilitySwing": -1
                 }
             },
             "statEffects": {
@@ -804,27 +804,27 @@ data = [
                 "politics": {
                     "min": 20,
                     "max": 50,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "economy": {
                     "min": 30,
                     "max": 80,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "environment": {
                     "min": 10,
                     "max": 40,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "military": {
                     "min": 10,
                     "max": 30,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "qualityOfLife": {
                     "min": 60,
                     "max": 100,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 }
             },
             "statEffects": {
@@ -854,27 +854,27 @@ data = [
                 "politics": {
                     "min": 40,
                     "max": 80,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "economy": {
                     "min": 50,
                     "max": 90,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 },
                 "environment": {
                     "min": 10,
                     "max": 50,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "military": {
                     "min": 10,
                     "max": 30,
-                    "probabilitySwing": "neutral"
+                    "probabilitySwing": 0
                 },
                 "qualityOfLife": {
                     "min": 70,
                     "max": 100,
-                    "probabilitySwing": "positive"
+                    "probabilitySwing": 1
                 }
             },
             "statEffects": {
@@ -904,27 +904,27 @@ data = [
       "politics": {
         "min": 30,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "economy": {
         "min": 40,
         "max": 80,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -954,27 +954,27 @@ data = [
       "politics": {
         "min": 20,
         "max": 60,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 30,
         "max": 70,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 40,
         "max": 80,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1004,27 +1004,27 @@ data = [
       "politics": {
         "min": 40,
         "max": 80,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 70,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1054,27 +1054,27 @@ data = [
       "politics": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "economy": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "environment": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1100,27 +1100,27 @@ data = [
       "politics": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 30,
         "max": 70,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1150,27 +1150,27 @@ data = [
       "politics": {
         "min": 50,
         "max": 80,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "economy": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "environment": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "military": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
@@ -1200,27 +1200,27 @@ data = [
       "politics": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 70,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1250,27 +1250,27 @@ data = [
       "politics": {
         "min": 40,
         "max": 80,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 50,
         "max": 80,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "environment": {
         "min": 60,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1300,27 +1300,27 @@ data = [
       "politics": {
         "min": 30,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "economy": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "environment": {
         "min": 50,
         "max": 100,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       }
     },
     "statEffects": {
@@ -1346,27 +1346,27 @@ data = [
       "politics": {
         "min": 50,
         "max": 80,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "economy": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "environment": {
         "min": 70,
         "max": 100,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "military": {
         "min": 20,
         "max": 50,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
@@ -1396,27 +1396,27 @@ data = [
       "politics": {
         "min": 40,
         "max": 80,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "economy": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "environment": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 50,
         "max": 90,
-        "probabilitySwing": "positive"
+        "probabilitySwing": 1
       }
     },
     "statEffects": {
@@ -1446,27 +1446,27 @@ data = [
       "politics": {
         "min": 40,
         "max": 70,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "economy": {
         "min": 30,
         "max": 60,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "environment": {
         "min": 70,
         "max": 100,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       },
       "military": {
         "min": 10,
         "max": 30,
-        "probabilitySwing": "neutral"
+        "probabilitySwing": 0
       },
       "qualityOfLife": {
         "min": 10,
         "max": 40,
-        "probabilitySwing": "negative"
+        "probabilitySwing": -1
       }
     },
     "statEffects": {
