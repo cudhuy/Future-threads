@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware to parse JSON requests
 app.use(express.json());
 app.use(cors());
-// Set up session middleware
+// Session middleware
 app.use(
 	session({
 		secret: 'your-secret-key', // Replace with a secure key for your app
@@ -168,47 +168,6 @@ app.post('/api/newGame', async (req, res) => {
 	});
 });
 
-// Sample route to set user session
-app.post('/login', (req, res) => {
-	const { email, password } = req.body;
-
-	// Dummy authentication logic (replace with real logic)
-	if (email === 'user@example.com' && password === 'password123') {
-		// Store user info in session
-		req.session.user = {
-			email: email,
-			loggedIn: true,
-		};
-		return res
-			.status(200)
-			.json({ message: 'Login successful', user: req.session.user });
-	}
-
-	return res.status(401).json({ message: 'Invalid credentials' });
-});
-
-// Sample route to check if the user is logged in
-app.get('/profile', (req, res) => {
-	if (req.session.user && req.session.user.loggedIn) {
-		return res
-			.status(200)
-			.json({ message: 'User is logged in', user: req.session.user });
-	}
-
-	return res.status(401).json({ message: 'You need to log in first' });
-});
-
-// Sample route to log out
-app.post('/logout', (req, res) => {
-	req.session.destroy((err) => {
-		if (err) {
-			return res.status(500).json({ message: 'Failed to log out' });
-		}
-
-		res.status(200).json({ message: 'Logged out successfully' });
-	});
-});
-
 // Placeholder database query function (unused)
 function execQuery(query) {
 	connection.connect((error) => {
@@ -234,6 +193,12 @@ function execQuery(query) {
 	connection.end();
 }
 
+// Endpoint to handle voice generation requests
+app.get('/api/voice/:title', async (req, res) => {
+	const audioPath = await getAudioPath(req.params.title);
+	res.sendFile(audioPath);
+});
+
 // Start the server
 getEvents().then(() => {
 	getChoices().then(() => {
@@ -244,12 +209,6 @@ getEvents().then(() => {
 			}
 		});
 	});
-});
-
-// Endpoint to handle voice generation requests
-app.get('/api/voice/:title', async (req, res) => {
-	const audioPath = await getAudioPath(req.params.title);
-	res.sendFile(audioPath);
 });
 
 // Start the server
