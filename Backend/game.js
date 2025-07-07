@@ -1,25 +1,30 @@
-function random_range(min,max) {
-    // picks a random float in the range, inclusive
-    let ran = Math.random();
-    return ran*(max-min)+min;
+function random_range(min, max) {
+	// picks a random float in the range, inclusive
+	let ran = Math.random();
+	return ran * (max - min) + min;
 }
 
 function weighted_random_choice(data) {
-    // takes data in the form [['item1',2], ['item2',1], ['item3',4]]
-    // returns the index //not ->// returns one of the keys e.g. 'item1' with its weighted probability, for item 1 being 2/7
+	// takes data in the form [['item1',2], ['item2',1], ['item3',4]]
+	// returns the index //not ->// returns one of the keys e.g. 'item1' with its weighted probability, for item 1 being 2/7
 
-    let total_weight = 0;
-    for (let info of data) {
-        total_weight += info[1];
-    }
-    let ran_val = random_range(0, total_weight);
-    for (let i=0;i<data.length;i++) {
-        ran_val -= data[i][1];
-        if (ran_val < 0) {
-            return data[i][0]; // return the key, not the index
-        }
-    }
-    console.log('weighted random function broke', ran_val, data, total_weight);
+	let total_weight = 0;
+	for (let info of data) {
+		total_weight += info[1];
+	}
+	let ran_val = random_range(0, total_weight);
+	for (let i = 0; i < data.length; i++) {
+		ran_val -= data[i][1];
+		if (ran_val < 0) {
+			return data[i][0]; // r	eturn the key, not the index
+		}
+	}
+	console.log('weighted random function broke', ran_val, data, total_weight);
+}
+
+function random_choice(arr) {
+	// returns a random item from the given array
+	return arr[random_int(0, arr.length - 1)];
 }
 
 class GameManagerClass {
@@ -47,6 +52,7 @@ class GameManagerClass {
 		let newCards = this.getNewCards();
 
 		this.currentYear += 1;
+		return { events: newEvents, cards: newCards };
 	}
 
 	getNewEvents() {
@@ -66,7 +72,14 @@ class GameManagerClass {
 	}
 
 	getNewCards() {
-		// TODO: Placeholder for card generation logic
+		let cards = [...this.cards];
+		let selectedCards = [];
+		for (let i = 0; i < 3; i++) {
+			let index = random_range(0, this.cards.length - 1);
+			selectedCards.push(this.cards[index]);
+			cards.splice(index, 1);
+		}
+		return selectedCards;
 	}
 
 	getStats() {
