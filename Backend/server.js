@@ -36,16 +36,22 @@ app.use(express.json());
 app.use(cors());
 
 let eventData = null;
+let cardData = null;
 let gameManager = null;
 
 // Loads timeline data from the JSON file asynchronously
 const getJson = async () => {
 	try {
-		const fileData = await fs.readFile(
+		let fileData = await fs.readFile(
 			'../public/timeline_data/timeline_data.json',
 			'utf8',
 		);
 		eventData = JSON.parse(fileData);
+		fileData = await fs.readFile(
+			'../public/timeline_data/choices.json',
+			'utf8',
+		);
+		cardData = JSON.parse(fileData);
 		console.log('Timeline data loaded successfully.');
 	} catch (err) {
 		console.error('Error loading timeline data:', err);
@@ -178,7 +184,7 @@ getJson().then(() => {
 	app.listen(PORT, () => {
 		console.log(`Server is running on port ${PORT}`);
 	});
-	gameManager = new GameManagerClass(eventData);
+	gameManager = new GameManagerClass(eventData, cardData);
 });
 
 // Endpoint to handle voice generation requests
