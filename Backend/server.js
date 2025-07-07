@@ -34,73 +34,6 @@ const PORT = process.env.PORT || 5000;
 // Middleware to parse JSON requests
 app.use(express.json());
 app.use(cors());
-
-let eventData = null;
-let cardData = null;
-let gameManager = null;
-
-// Loads timeline data from the JSON file asynchronously
-const getJson = async () => {
-	try {
-		let fileData = await fs.readFile(
-			'../public/timeline_data/timeline_data.json',
-			'utf8',
-		);
-		eventData = JSON.parse(fileData);
-		fileData = await fs.readFile(
-			'../public/timeline_data/choices.json',
-			'utf8',
-		);
-		cardData = JSON.parse(fileData);
-		console.log('Timeline data loaded successfully.');
-	} catch (err) {
-		console.error('Error loading timeline data:', err);
-		return null;
-	}
-};
-
-function addEventItem(event) {
-	// Create a new event item with the provided data
-}
-
-function addChoiceCardItem(choice) {
-	// Create a new choice card item with the provided data
-}
-
-app.post('/api/filteredEvents', async (req, res) => {
-	console.log(eventData);
-});
-
-// Endpoint to handle chat requests
-app.post('/api/chat', async (req, res) => {
-	const { message, provider } = req.body;
-
-	if (!message || typeof message !== 'string') {
-		return res.status(400).json({ error: 'Invalid message format' });
-	}
-
-	try {
-		let botMessage = '';
-
-		if (provider === 'google') {
-			const result = await geminiModel.generateContent([message]);
-			console.log(result.response.text());
-			botMessage = result.response.text();
-		} else {
-			const response = await openai.createChatCompletion({
-				model: chatgptModel,
-				messages: [{ role: 'user', content: message }],
-			});
-			botMessage = response.data.choices[0].message.content;
-		}
-
-		res.json({ content: botMessage });
-	} catch (error) {
-		console.error('Error calling AI API:', error.message);
-		res.status(500).json({ error: 'Failed to process the request' });
-	}
-});
-
 // Set up session middleware
 app.use(
 	session({
@@ -113,6 +46,127 @@ app.use(
 		},
 	}),
 );
+
+// Data storage
+let eventData = null;
+let choiceData = null;
+let gameManager = null;
+
+// Loads timeline data from the JSON file asynchronously
+const getEvents = async () => {
+	try {
+		const fileData = await fs.readFile(
+			'../public/timeline_data/timeline_data.json',
+			'utf8',
+		);
+		eventData = JSON.parse(fileData);
+		console.log('Event data loaded successfully.');
+	} catch (err) {
+		console.error('Error loading event data:', err);
+		return (eventData = null);
+	}
+};
+
+const getChoices = async () => {
+	try {
+		const fileData = await fs.readFile(
+			'../public/timeline_data/choices.json',
+			'utf8',
+		);
+		choiceData = JSON.parse(fileData);
+		console.log('Choice data loaded successfully.');
+	} catch (err) {
+		console.error('Error loading choice data:', err);
+		return (choiceData = null);
+	}
+};
+
+function addEventItem(event) {
+	// TODO: Create a new event item with the provided data
+}
+
+function addChoiceCardItem(choice) {
+	// TODO: Create a new choice card item with the provided data
+}
+
+// API Endpoints to handle chat requests
+app.post('/api/filteredEvents', async (req, res) => {
+	if (!eventData) {
+		return res.status(500).json({ error: 'Event data not loaded' });
+	}
+	res.json({ events: eventData });
+});
+
+app.post('/api/chat', async (req, res) => {
+	const { message, provider } = req.body;
+
+	if (!message || typeof message !== 'string') {
+		return res.status(400).json({ error: 'Invalid message format' });
+	}
+
+	try {
+		let botMessage = '';
+		if (provider === 'google') {
+			const result = await geminiModel.generateContent([message]);
+			botMessage = result.response.text();
+		} else {
+			const response = await openai.createChatCompletion({
+				model: chatgptModel,
+				messages: [{ role: 'user', content: message }],
+			});
+			botMessage = response.data.choices[0].message.content;
+		}
+		res.json({ content: botMessage });
+	} catch (error) {
+		console.error('Error calling AI API:', error.message);
+		res.status(500).json({ error: 'Failed to process the request' });
+	}
+});
+
+app.post('/api/incYear', async (req, res) => {
+	const { selectedCard } = req.body;
+	if (!req.session.gameManager) {
+		return res.status(400).json({ error: 'Game manager not initialized' });
+	}
+	try {
+		const result = req.session.gameManager.incrementYear(selectedCard);
+		res.status(200).json({
+			message: 'Year incremented',
+			currentYear: result.currentYear,
+			newEvents: result.newEvents,
+			newCards: result.newCards,
+		});
+	} catch (error) {
+		console.error('Error incrementing year:', error);
+		res.status(500).json({ error: 'Failed to increment year' });
+	}
+});
+
+app.post('/api/getGameState', async (req, res) => {
+	if (!req.session.gameManager) {
+		return res.status(400).json({ error: 'Game manager not initialized' });
+	}
+	const gameManager = req.session.gameManager;
+	res.json({
+		stats: gameManager.getStats(),
+		currentYear: gameManager.currentYear,
+		pastEvents: gameManager.pastEvents,
+	});
+});
+
+app.post('/api/newGame', async (req, res) => {
+	if (!eventData || !choiceData) {
+		return res.status(500).json({ error: 'Event or choice data not loaded' });
+	}
+	req.session.gameManager = new GameManagerClass(eventData, choiceData);
+	const gameManager = req.session.gameManager;
+	res.status(200).json({
+		message: 'New game started',
+		stats: gameManager.getStats(),
+		currentYear: gameManager.currentYear,
+		pastEvents: gameManager.pastEvents,
+	});
+});
 
 // Sample route to set user session
 app.post('/login', (req, res) => {
@@ -155,6 +209,7 @@ app.post('/logout', (req, res) => {
 	});
 });
 
+// Placeholder database query function (unused)
 function execQuery(query) {
 	connection.connect((error) => {
 		if (error) {
@@ -180,11 +235,15 @@ function execQuery(query) {
 }
 
 // Start the server
-getJson().then(() => {
-	app.listen(PORT, () => {
-		console.log(`Server is running on port ${PORT}`);
+getEvents().then(() => {
+	getChoices().then(() => {
+		app.listen(PORT, () => {
+			console.log(`Server is running on http://localhost:${PORT}`);
+			if (eventData && choiceData) {
+				gameManager = new GameManagerClass(eventData, choiceData);
+			}
+		});
 	});
-	gameManager = new GameManagerClass(eventData, cardData);
 });
 
 // Endpoint to handle voice generation requests

@@ -39,7 +39,7 @@ class GameManagerClass {
 	}
 
 	selectCard() {
-		// Placeholder for card selection logic
+		// TODO: Placeholder for card selection logic
 	}
 
 	incrementYear(selectedCard) {
@@ -66,7 +66,7 @@ class GameManagerClass {
 	}
 
 	getNewCards() {
-		// Placeholder for card generation logic
+		// TODO: Placeholder for card generation logic
 	}
 
 	getStats() {
