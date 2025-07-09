@@ -1,9 +1,11 @@
+// This file contains the GameManagerClass which manages the game state, including events, cards, and stats.
 function random_range(min, max) {
 	// picks a random float in the range, inclusive
 	let ran = Math.random();
 	return ran * (max - min) + min;
 }
 
+// This function picks a random integer in the range, inclusive
 function weighted_random_choice(data) {
 	// takes data in the form [['item1',2], ['item2',1], ['item3',4]]
 	// returns the index //not ->// returns one of the keys e.g. 'item1' with its weighted probability, for item 1 being 2/7
@@ -22,6 +24,7 @@ function weighted_random_choice(data) {
 	console.log('weighted random function broke', ran_val, data, total_weight);
 }
 
+// This function clamps a value between a minimum and maximum value.
 function clamp(value, min, max) {
 	// returns the value, limited to within the given min and max
 	if (min < max) {
@@ -30,6 +33,7 @@ function clamp(value, min, max) {
 	return min;
 }
 
+// This class manages the game state, including events, cards, and stats.
 class GameManagerClass {
 	constructor(events, cards) {
 		this.events = events;
@@ -61,7 +65,7 @@ class GameManagerClass {
 		return { events: newEvents, cards: this.currentCards, stats: statChanges };
 	}
 
-	// Returns a list of new events, each with a probability based on the current stats
+	// This function returns a list of new events based on the current stats and year.
 	getNewEvents() {
 		let possibleEvents = [];
 		for (let event of this.events) {
@@ -77,7 +81,8 @@ class GameManagerClass {
 		}
 		return selectedEvents;
 	}
-
+	
+	// This function applies the new events to the current stats and returns the changes.
 	applyNewEvents(newEvents) {
 		let statChanges = [];
 		for (let event of newEvents) {
@@ -115,6 +120,7 @@ class GameManagerClass {
 		};
 	}
 
+	// This function calculates the probability of an event occurring based on the current stats and year.
 	getEventProbability(event) {
 		if (
 			event['dateRange']['earliestYear'] < this.currentYear ||

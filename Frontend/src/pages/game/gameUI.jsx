@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import StatsBar from './components/statsBar';
 import EventDisplay from './components/eventDisplay';
 import CardsDeck from './components/cardsDeck';
@@ -20,8 +21,15 @@ function GameUI() {
 	const [randomEvent, setRandomEvent] = useState(null);
 	const [eventsHappened, setEventsHappened] = useState([]);
 
+	useEffect(() => {}, []);
+
 	const handleCardClick = (card) => {
 		setSelectedCard(card);
+
+		const response = axios('http://localhost:5000/api/incYear', {
+			selectedCard: card,
+		});
+		console.log(response);
 
 		// Animate stat changes after delay
 		setTimeout(() => {
@@ -40,9 +48,7 @@ function GameUI() {
 			setTimeout(() => {
 				setRandomEvent('Citizens react to your decision!');
 				// Load next random event
-				setCurrentEvent(
-					gameEvents[Math.floor(Math.random() * gameEvents.length)],
-				);
+				setCurrentEvent();
 				setEventsHappened((prev) => [...prev, currentEvent]);
 				setSelectedCard(null);
 			}, 1000);
