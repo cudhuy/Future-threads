@@ -22,16 +22,19 @@ function weighted_random_choice(data) {
 	console.log('weighted random function broke', ran_val, data, total_weight);
 }
 
-function random_choice(arr) {
-	// returns a random item from the given array
-	return arr[random_int(0, arr.length - 1)];
+function clamp(value, min, max) {
+	// returns the value, limited to within the given min and max
+	if (min < max) {
+		return Math.min(Math.max(value, min), max);
+	}
+	return min;
 }
 
 class GameManagerClass {
 	constructor(events, cards) {
 		this.events = events;
 		this.cards = cards;
-		this.past_events = {};
+		this.pastEvents = [];
 		this.stats = {
 			economy: 50,
 			environment: 50,
@@ -43,18 +46,22 @@ class GameManagerClass {
 		this.currentYear = 2025;
 	}
 
-	selectCard() {
-		// TODO: Placeholder for card selection logic
+	init() {
+		this.currentCards = this.getNewCards();
+		return { cards: this.currentCards, stats: this.stats };
 	}
 
 	incrementYear(selectedCard) {
 		let newEvents = this.getNewEvents();
-		let newCards = this.getNewCards();
+		this.currentCards = this.getNewCards();
+
+		let statChanges = this.applyNewEvents(newEvents);
 
 		this.currentYear += 1;
-		return { events: newEvents, cards: newCards };
+		return { events: newEvents, cards: this.currentCards, stats: statChanges };
 	}
 
+	// Returns a list of new events, each with a probability based on the current stats
 	getNewEvents() {
 		let possibleEvents = [];
 		for (let event of this.events) {
@@ -71,6 +78,24 @@ class GameManagerClass {
 		return selectedEvents;
 	}
 
+	applyNewEvents(newEvents) {
+		let statChanges = [];
+		for (let event of newEvents) {
+			for (let stat of Object.keys(event['statEffects'])) {
+				let stat_change =
+					event['statEffects'][stat]['change'] +
+					random_range(
+						-event['statEffects'][stat]['range'],
+						event['statEffects'][stat]['range'],
+					);
+				this.stats[stat] = clamp(this.stats[stat] + stat_change, 0, 100);
+			}
+			statChanges.push({ ...this.stats });
+			this.pastEvents.push(event);
+		}
+		return statChanges;
+	}
+
 	getNewCards() {
 		let cards = [...this.cards];
 		let selectedCards = [];
@@ -82,8 +107,12 @@ class GameManagerClass {
 		return selectedCards;
 	}
 
-	getStats() {
-		return this.stats;
+	getGameStat() {
+		return {
+			stats: this.stats,
+			currentCards: this.currentCards,
+			pastEvents: this.pastEvents,
+		};
 	}
 
 	getEventProbability(event) {
