@@ -24,7 +24,7 @@ function GameUI() {
 		console.log('INIT DATA:', initData);
 		setCurrentEvent(initData.data.content.cards);
 		setStats(initData.data.content.stats);
-	}, []);
+	});
 
 	const handleCardClick = (card) => {
 		setSelectedCard(card);

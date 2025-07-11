@@ -27,8 +27,6 @@ export default function Game() {
 		}
 	};
 
-	useEffect(() => {});
-
     const [currentEvent, setCurrentEvent] = useState();
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [randomEvent, setRandomEvent] = useState(null);
