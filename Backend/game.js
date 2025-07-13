@@ -135,7 +135,6 @@ class GameManagerClass {
 				);
 			}
 		}
-		console.log('HUYHIHI', selectedCards); // Debugging line to check selected cards
 		return selectedCards;
 	}
 
