@@ -21,7 +21,11 @@ function GameUI() {
 
 	useEffect(() => {
 		async function getData() {
-			const initData = await axios.post('http://localhost:5000/api/newGame');
+			const initData = await axios.post(
+				'http://localhost:5000/api/newGame',
+				{},
+				{ withCredentials: true },
+			);
 
 			setCurrentEvent(initData.data.content);
 			setStats(initData.data.content.stats);
@@ -30,9 +34,11 @@ function GameUI() {
 	}, []);
 
 	async function getData() {
-		const returnJson = await axios.post('http://localhost:5000/api/incYear', {
-			selectedCard: card,
-		});
+		const returnJson = await axios.post(
+			'http://localhost:5000/api/incYear',
+			{ selectedCard: JSON.stringify(card) },
+			{ withCredentials: true },
+		);
 
 		console.log('CARD SELECT DATA:', returnJson);
 		setCurrentEvent(returnJson.data.content);

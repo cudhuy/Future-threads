@@ -33,7 +33,13 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON requests
 app.use(express.json());
-app.use(cors());
+app.use(
+	cors({
+		origin: 'http://localhost:3000', // or whatever your frontend port is
+		credentials: true,
+	}),
+);
+
 // Session middleware
 app.use(
 	session({
@@ -125,16 +131,25 @@ app.post('/api/chat', async (req, res) => {
 
 app.post('/api/incYear', async (req, res) => {
 	const { selectedCard } = req.body;
-	if (!req.session.gameManager) {
-		return res.status(400).json({ error: 'Game manager not initialized' });
+
+	if (!req.session.gameData) {
+		return res.status(400).json({ error: 'Game data not found in session' });
 	}
+
 	try {
-		const result = req.session.gameManager.incrementYear(selectedCard);
+		const gameManager = new GameManagerClass(eventData, choiceData);
+		gameManager.fromJSON(req.session.gameData);
+
+		const result = gameManager.incrementYear(selectedCard);
+
+		req.session.gameData = gameManager.toJSON();
+
 		res.status(200).json({
 			message: 'Year incremented',
 			currentYear: result.currentYear,
 			newEvents: result.newEvents,
 			newCards: result.newCards,
+			stats: gameManager.getStats(), // optional addition
 		});
 	} catch (error) {
 		console.error('Error incrementing year:', error);
@@ -158,10 +173,15 @@ app.post('/api/newGame', async (req, res) => {
 	if (!eventData || !choiceData) {
 		return res.status(500).json({ error: 'Event or choice data not loaded' });
 	}
-	req.session.gameManager = new GameManagerClass(eventData, choiceData);
-	const gameManager = req.session.gameManager;
+
+	const gameManager = new GameManagerClass(eventData, choiceData);
+	const returnData = gameManager.init();
+
+	req.session.gameData = gameManager.toJSON();
+
 	res.status(200).json({
 		message: 'New game started',
+		content: returnData,
 		stats: gameManager.getStats(),
 		currentYear: gameManager.currentYear,
 		pastEvents: gameManager.pastEvents,
