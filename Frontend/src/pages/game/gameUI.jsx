@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import StatsBar from './components/statsBar';
 import EventDisplay from './components/eventDisplay';
 import CardsDeck from './components/cardsDeck';
 import RandomEventPopup from './components/randomEventPopup';
-import { gameEvents } from '../../data/gameEvents';
 
 function GameUI() {
 	// Game state
@@ -15,57 +15,59 @@ function GameUI() {
 		economy: 50,
 	});
 
-	const [currentEvent, setCurrentEvent] = useState(gameEvents[0]);
-	const [selectedCard, setSelectedCard] = useState(null);
-	const [randomEvent, setRandomEvent] = useState(null);
+	const [currentEvent, setCurrentEvent] = useState();
+	const [selectedCard, setSelectedCard] = useState({});
 	const [eventsHappened, setEventsHappened] = useState([]);
 
-	const handleCardClick = (card) => {
-		setSelectedCard(card);
+	useEffect(() => {
+		async function getData() {
+			const initData = await axios.post(
+				'http://localhost:5000/api/newGame',
+				{},
+				{ withCredentials: true },
+			);
 
-		// Animate stat changes after delay
-		setTimeout(() => {
-			setStats((prev) => {
-				const newStats = { ...prev };
-				Object.keys(card.effects).forEach((stat) => {
-					newStats[stat] = Math.max(
-						0,
-						Math.min(100, prev[stat] + card.effects[stat]),
-					);
-				});
-				return newStats;
-			});
+			setCurrentEvent(initData.data.content);
+			setStats(initData.data.content.stats);
+		}
+		getData();
+	}, []);
 
-			// Trigger random event
-			setTimeout(() => {
-				setRandomEvent('Citizens react to your decision!');
-				// Load next random event
-				setCurrentEvent(
-					gameEvents[Math.floor(Math.random() * gameEvents.length)],
-				);
-				setEventsHappened((prev) => [...prev, currentEvent]);
-				setSelectedCard(null);
-			}, 1000);
-		}, 500);
-	};
+	async function getData() {
+		const returnJson = await axios.post(
+			'http://localhost:5000/api/incYear',
+			{ selectedCard: JSON.stringify(card) },
+			{ withCredentials: true },
+		);
+
+		console.log('CARD SELECT DATA:', returnJson);
+		setCurrentEvent(returnJson.data.content);
+		setStats(returnJson.data.content.stats);
+		// setCurrentEvent();
+		// setEventsHappened((prev) => [...prev, currentEvent]);
+	}
+
+	getData();
 
 	return (
 		<div className='game-container'>
 			<StatsBar stats={stats} />
 			<EventDisplay eventsOccured={eventsHappened} />
 
-			{!randomEvent ? (
+			{currentEvent && (
 				<CardsDeck
 					cards={currentEvent.cards}
 					onCardClick={handleCardClick}
 					selectedCardId={selectedCard?.id}
 				/>
-			) : (
+			)}
+
+			{
 				<RandomEventPopup
 					event={randomEvent}
 					onClose={() => setRandomEvent(null)}
 				/>
-			)}
+			}
 		</div>
 	);
 }

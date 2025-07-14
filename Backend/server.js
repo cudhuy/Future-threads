@@ -33,69 +33,14 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON requests
 app.use(express.json());
-app.use(cors());
+app.use(
+	cors({
+		origin: 'http://localhost:3000', // or whatever your frontend port is
+		credentials: true,
+	}),
+);
 
-let eventData = null;
-let gameManager = null;
-
-// Loads timeline data from the JSON file asynchronously
-const getJson = async () => {
-	try {
-		const fileData = await fs.readFile(
-			'../public/timeline_data/timeline_data.json',
-			'utf8',
-		);
-		eventData = JSON.parse(fileData);
-		console.log('Timeline data loaded successfully.');
-	} catch (err) {
-		console.error('Error loading timeline data:', err);
-		return null;
-	}
-};
-
-function addEventItem(event) {
-	// Create a new event item with the provided data
-}
-
-function addChoiceCardItem(choice) {
-	// Create a new choice card item with the provided data
-}
-
-app.post('/api/filteredEvents', async (req, res) => {
-	console.log(eventData);
-});
-
-// Endpoint to handle chat requests
-app.post('/api/chat', async (req, res) => {
-	const { message, provider } = req.body;
-
-	if (!message || typeof message !== 'string') {
-		return res.status(400).json({ error: 'Invalid message format' });
-	}
-
-	try {
-		let botMessage = '';
-
-		if (provider === 'google') {
-			const result = await geminiModel.generateContent([message]);
-			console.log(result.response.text());
-			botMessage = result.response.text();
-		} else {
-			const response = await openai.createChatCompletion({
-				model: chatgptModel,
-				messages: [{ role: 'user', content: message }],
-			});
-			botMessage = response.data.choices[0].message.content;
-		}
-
-		res.json({ content: botMessage });
-	} catch (error) {
-		console.error('Error calling AI API:', error.message);
-		res.status(500).json({ error: 'Failed to process the request' });
-	}
-});
-
-// Set up session middleware
+// Session middleware
 app.use(
 	session({
 		secret: 'your-secret-key', // Replace with a secure key for your app
@@ -108,47 +53,140 @@ app.use(
 	}),
 );
 
-// Sample route to set user session
-app.post('/login', (req, res) => {
-	const { email, password } = req.body;
+// Data storage
+let eventData = null;
+let choiceData = null;
+let gameManager = null;
 
-	// Dummy authentication logic (replace with real logic)
-	if (email === 'user@example.com' && password === 'password123') {
-		// Store user info in session
-		req.session.user = {
-			email: email,
-			loggedIn: true,
-		};
-		return res
-			.status(200)
-			.json({ message: 'Login successful', user: req.session.user });
+// Loads timeline data from the JSON file asynchronously
+const getEvents = async () => {
+	try {
+		const fileData = await fs.readFile(
+			'../public/timeline_data/timeline_data.json',
+			'utf8',
+		);
+		eventData = JSON.parse(fileData);
+		console.log('Event data loaded successfully.');
+	} catch (err) {
+		console.error('Error loading event data:', err);
+		return (eventData = null);
 	}
+};
 
-	return res.status(401).json({ message: 'Invalid credentials' });
+const getChoices = async () => {
+	try {
+		const fileData = await fs.readFile(
+			'../public/timeline_data/choices.json',
+			'utf8',
+		);
+		choiceData = JSON.parse(fileData);
+		console.log('Choice data loaded successfully.');
+	} catch (err) {
+		console.error('Error loading choice data:', err);
+		return (choiceData = null);
+	}
+};
+
+function addEventItem(event) {
+	// TODO: Create a new event item with the provided data
+}
+
+function addChoiceCardItem(choice) {
+	// TODO: Create a new choice card item with the provided data
+}
+
+// API Endpoints to handle chat requests
+app.post('/api/filteredEvents', async (req, res) => {
+	if (!eventData) {
+		return res.status(500).json({ error: 'Event data not loaded' });
+	}
+	res.json({ events: eventData });
 });
 
-// Sample route to check if the user is logged in
-app.get('/profile', (req, res) => {
-	if (req.session.user && req.session.user.loggedIn) {
-		return res
-			.status(200)
-			.json({ message: 'User is logged in', user: req.session.user });
+app.post('/api/chat', async (req, res) => {
+	const { message, provider } = req.body;
+
+	if (!message || typeof message !== 'string') {
+		return res.status(400).json({ error: 'Invalid message format' });
 	}
 
-	return res.status(401).json({ message: 'You need to log in first' });
-});
-
-// Sample route to log out
-app.post('/logout', (req, res) => {
-	req.session.destroy((err) => {
-		if (err) {
-			return res.status(500).json({ message: 'Failed to log out' });
+	try {
+		let botMessage = '';
+		if (provider === 'google') {
+			const result = await geminiModel.generateContent([message]);
+			botMessage = result.response.text();
+		} else {
+			const response = await openai.createChatCompletion({
+				model: chatgptModel,
+				messages: [{ role: 'user', content: message }],
+			});
+			botMessage = response.data.choices[0].message.content;
 		}
+		res.json({ content: botMessage });
+	} catch (error) {
+		console.error('Error calling AI API:', error.message);
+		res.status(500).json({ error: 'Failed to process the request' });
+	}
+});
 
-		res.status(200).json({ message: 'Logged out successfully' });
+app.post('/api/incYear', async (req, res) => {
+	const selectedCard = JSON.parse(req.body.selectedCard);
+
+	if (!req.session.gameData) {
+		return res.status(400).json({ error: 'Game data not found in session' });
+	}
+
+	try {
+		const gameManager = new GameManagerClass(eventData, choiceData);
+		gameManager.fromJSON(req.session.gameData);
+		const response = gameManager.incrementYear(selectedCard);
+		req.session.gameData = gameManager.toJSON();
+		res.status(200).json({
+			content: response,
+			message: 'Year incremented',
+			currentYear: gameManager.currentYear,
+			newEvents: response.events,
+			newCards: response.cards,
+			stats: gameManager.getGameStat().stats, // optional addition
+		});
+	} catch (error) {
+		console.error('Error incrementing year:', error);
+		res.status(500).json({ error: 'Failed to increment year' });
+	}
+});
+
+app.post('/api/getGameState', async (req, res) => {
+	if (!req.session.gameManager) {
+		return res.status(400).json({ error: 'Game manager not initialized' });
+	}
+	const gameManager = req.session.gameManager;
+	res.json({
+		stats: gameManager.getStats(),
+		currentYear: gameManager.currentYear,
+		pastEvents: gameManager.pastEvents,
 	});
 });
 
+app.post('/api/newGame', async (req, res) => {
+	if (!eventData || !choiceData) {
+		return res.status(500).json({ error: 'Event or choice data not loaded' });
+	}
+
+	const gameManager = new GameManagerClass(eventData, choiceData);
+	const returnData = gameManager.init();
+
+	req.session.gameData = gameManager.toJSON();
+
+	res.json({
+		content: returnData,
+		message: 'New game started',
+		stats: gameManager.getStats(),
+		currentYear: gameManager.currentYear,
+		pastEvents: gameManager.pastEvents,
+	});
+});
+
+// Placeholder database query function (unused)
 function execQuery(query) {
 	connection.connect((error) => {
 		if (error) {
@@ -173,14 +211,6 @@ function execQuery(query) {
 	connection.end();
 }
 
-// Start the server
-getJson().then(() => {
-	app.listen(PORT, () => {
-		console.log(`Server is running on port ${PORT}`);
-	});
-	gameManager = new GameManagerClass(eventData);
-});
-
 // Endpoint to handle voice generation requests
 app.get('/api/voice/:title', async (req, res) => {
 	const audioPath = await getAudioPath(req.params.title);
@@ -188,6 +218,13 @@ app.get('/api/voice/:title', async (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
+getEvents().then(() => {
+	getChoices().then(() => {
+		app.listen(PORT, () => {
+			console.log(`Server is running on http://localhost:${PORT}`);
+			if (eventData && choiceData) {
+				gameManager = new GameManagerClass(eventData, choiceData);
+			}
+		});
+	});
 });

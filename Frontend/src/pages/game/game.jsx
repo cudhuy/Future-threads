@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import StatsBar from './components/statsBar.jsx';
 import EventDisplay from './components/eventDisplay.jsx';
 import CardsDeck from './components/cardsDeck.jsx';
@@ -15,7 +16,18 @@ export default function Game() {
 		economy: 50,
 	});
 
-	const [currentEvent, setCurrentEvent] = useState(gameEvents[0]);
+	const handleSendMessage = async () => {
+		try {
+			const response = await axios.post(
+				'http://localhost:5000/api/filteredEvents',
+			);
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+    const [currentEvent, setCurrentEvent] = useState();
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [randomEvent, setRandomEvent] = useState(null);
 
