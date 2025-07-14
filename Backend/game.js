@@ -66,7 +66,7 @@ class GameManagerClass {
 	}
 
 	incrementYear(selectedCard) {
-		this.applyCard(this.currentCards[selectedCard]);
+		this.applyCard(selectedCard);
 		let initialStats = { ...this.stats };
 
 		let newEvents = this.getNewEvents();
@@ -166,6 +166,21 @@ class GameManagerClass {
 			probability *= prog_change;
 		}
 		return probability;
+	}
+
+	fromJSON(jsonData) {
+		let data = JSON.parse(jsonData);
+		this.pastEvents = data.past_events;
+		this.stats = data.stats;
+		this.currentYear = data.currentYear;
+	}
+
+	toJSON() {
+		return JSON.stringify({
+			past_events: this.pastEvents,
+			stats: this.stats,
+			currentYear: this.currentYear,
+		});
 	}
 }
 

@@ -130,7 +130,7 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.post('/api/incYear', async (req, res) => {
-	const { selectedCard } = req.body;
+	const selectedCard = JSON.parse(req.body.selectedCard);
 
 	if (!req.session.gameData) {
 		return res.status(400).json({ error: 'Game data not found in session' });
@@ -139,17 +139,15 @@ app.post('/api/incYear', async (req, res) => {
 	try {
 		const gameManager = new GameManagerClass(eventData, choiceData);
 		gameManager.fromJSON(req.session.gameData);
-
-		const result = gameManager.incrementYear(selectedCard);
-
+		const response = gameManager.incrementYear(selectedCard);
 		req.session.gameData = gameManager.toJSON();
-
 		res.status(200).json({
+			content: response,
 			message: 'Year incremented',
-			currentYear: result.currentYear,
-			newEvents: result.newEvents,
-			newCards: result.newCards,
-			stats: gameManager.getStats(), // optional addition
+			currentYear: gameManager.currentYear,
+			newEvents: response.events,
+			newCards: response.cards,
+			stats: gameManager.getGameStat().stats, // optional addition
 		});
 	} catch (error) {
 		console.error('Error incrementing year:', error);
@@ -179,9 +177,9 @@ app.post('/api/newGame', async (req, res) => {
 
 	req.session.gameData = gameManager.toJSON();
 
-	res.status(200).json({
-		message: 'New game started',
+	res.json({
 		content: returnData,
+		message: 'New game started',
 		stats: gameManager.getStats(),
 		currentYear: gameManager.currentYear,
 		pastEvents: gameManager.pastEvents,
