@@ -24,11 +24,15 @@ function weighted_random_choice(data) {
 	for (let info of data) {
 		total_weight += info[1];
 	}
+	if (total_weight === 0) {
+		return 0;
+	}
+
 	let ran_val = random_range(0, total_weight);
 	for (let i = 0; i < data.length; i++) {
 		ran_val -= data[i][1];
 		if (ran_val < 0) {
-			return data[i][0]; // r	eturn the key, not the index
+			return i; // returns the index of the item in the data array
 		}
 	}
 	console.log('weighted random function broke', ran_val, data, total_weight);
@@ -73,24 +77,38 @@ class GameManagerClass {
 		this.currentCards = this.getNewCards();
 
 		let statChanges = this.applyNewEvents(newEvents);
-		statChanges.unshift(initialStats, 0);
+		statChanges.unshift(initialStats);
+
 		this.currentYear += 1;
+		console.log('TO FOUNDTO END', {
+			events: newEvents,
+			cards: this.currentCards,
+			stats: statChanges,
+		});
+
 		return { events: newEvents, cards: this.currentCards, stats: statChanges };
 	}
 
 	// This function returns a list of new events based on the current stats and year.
 	getNewEvents() {
 		let possibleEvents = [];
-		for (let event of this.events) {
-			possibleEvents.push([event, this.getEventProbability(event)]);
+		for (let event of Object.values(this.events)) {
+			let probability = this.getEventProbability(event);
+			if (probability !== 0) {
+				possibleEvents.push([event, probability]);
+			} else {
+				possibleEvents.push([event, 1]);
+			}
 		}
+
 		let selectedEvents = [];
 		let i = 0;
 		let max_events = random_int(2, 4);
 		while (i < max_events && possibleEvents.length > 0) {
 			let new_event_index = weighted_random_choice(possibleEvents);
-			selectedEvents.push(possibleEvents[new_event_index]);
+			selectedEvents.push(possibleEvents[new_event_index][0]);
 			possibleEvents.splice(new_event_index, 1);
+			i++;
 		}
 		return selectedEvents;
 	}
