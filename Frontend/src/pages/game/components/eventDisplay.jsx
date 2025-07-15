@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import EventWithText from './EventWithText';
+import EventWithText from './eventWithText';
 
 const EventDisplay = ({ eventsOccured }) => {
 	console.log(eventsOccured);

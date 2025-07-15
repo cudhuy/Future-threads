@@ -62,7 +62,7 @@ let gameManager = null;
 const getEvents = async () => {
 	try {
 		const fileData = await fs.readFile(
-			'../public/timeline_data/timeline_data.json',
+			'../public/Frontend/timeline_data/timeline_data.json',
 			'utf8',
 		);
 		eventData = JSON.parse(fileData);
@@ -76,7 +76,7 @@ const getEvents = async () => {
 const getChoices = async () => {
 	try {
 		const fileData = await fs.readFile(
-			'../public/timeline_data/choices.json',
+			'../public/Frontend/timeline_data/choices.json',
 			'utf8',
 		);
 		choiceData = JSON.parse(fileData);

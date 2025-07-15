@@ -1,7 +1,7 @@
 import Filter from './filter/filter.jsx';
 import { useState, useEffect } from 'react';
-import Event from './timeline/Event.jsx';
-import LoadMoreButton from './timeline/LoadMoreButton.jsx';
+import Event from './timeline/event.jsx';
+import LoadMoreButton from './timeline/loadMoreButton.jsx';
 
 const getEntryDate = (entry, optimism) => {
 	for (let optimismRange of entry['optimism']) {
