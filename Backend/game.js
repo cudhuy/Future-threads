@@ -139,6 +139,7 @@ class GameManagerClass {
 				0,
 				100,
 			);
+			this.stats[stat] = clamp(this.stats[stat]+card["effects"][stat],0,100);
 		}
 	}
 

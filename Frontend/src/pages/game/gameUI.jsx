@@ -33,21 +33,67 @@ function GameUI() {
 		getData();
 	}, []);
 
-	async function getData() {
-		const returnJson = await axios.post(
-			'http://localhost:5000/api/incYear',
-			{ selectedCard: JSON.stringify(card) },
-			{ withCredentials: true },
-		);
+	const handleCardClick = (card) => {
+		setSelectedCard(card);
+		console.log('SELECTED CARD:', card);
 
-		console.log('CARD SELECT DATA:', returnJson);
-		setCurrentEvent(returnJson.data.content);
-		setStats(returnJson.data.content.stats);
-		// setCurrentEvent();
-		// setEventsHappened((prev) => [...prev, currentEvent]);
-	}
+		async function getData() {
+			try {
+				const returnJson = await axios.post(
+					'http://localhost:5000/api/incYear',
+					{ selectedCard: JSON.stringify(card) },
+					{ withCredentials: true },
+				);
 
-	getData();
+				const statsQueue = returnJson.data.content.stats.slice(1);
+				const initialStats = returnJson.data.content.stats[0];
+				const eventQueue = returnJson.data.content.events; // assuming 1 event at a time for now
+
+				console.log(statsQueue);
+				console.log(initialStats);
+				console.log(eventQueue);
+				setCurrentEvent(returnJson.data.content);
+				setStats(initialStats);
+				setSelectedCard(null);
+
+				runStatAnimation(statsQueue, eventQueue);
+			} catch (err) {
+				console.error('Error fetching card data:', err);
+			}
+		}
+
+		function runStatAnimation(statsQueue, eventQueue) {
+			if (statsQueue.length === 0) return;
+
+			let index = 0;
+
+			const handleEventUpdate = (eventIndex) => {
+				// Check if we are adding the first event or subsequent events
+				if (index === 0) {
+					setEventsHappened([eventQueue[eventIndex]]);
+					console.log('FIRST EVENT:', eventQueue[eventIndex]);
+				} else {
+					setEventsHappened((prev) => [...prev, eventQueue[eventIndex]]);
+				}
+			};
+
+			function step() {
+				setStats(statsQueue[index]);
+
+				handleEventUpdate(index);
+
+				index++;
+
+				if (index < statsQueue.length) {
+					setTimeout(step, 1000); // Adjust timeout duration as needed
+				}
+			}
+
+			step();
+		}
+
+		getData();
+	};
 
 	return (
 		<div className='game-container'>
