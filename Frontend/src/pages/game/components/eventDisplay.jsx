@@ -19,7 +19,6 @@ const EventDisplay = ({ eventsOccured }) => {
 					key={index}
 					event={event}
 					side={index % 7 === 0 ? 'left' : 'right'}
-					text={'Hello, World!'}
 				/>
 			))}
 			<div ref={divref} />
