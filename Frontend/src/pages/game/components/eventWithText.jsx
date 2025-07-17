@@ -39,7 +39,7 @@ const EventWithText = ({ event, side, text }) => {
 					side === 'left' ? 'justify-end' : 'justify-start'
 				} w-full py-12`}
 			>
-				<p>{text}</p>
+				<p>{event.description}</p>
 			</div>
 		</>
 	);
