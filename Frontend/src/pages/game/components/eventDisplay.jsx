@@ -15,11 +15,13 @@ const EventDisplay = ({ eventsOccured }) => {
 	return (
 		<div className='event-display'>
 			{eventsOccured.map((event, index) => (
-				<EventWithText
-					key={index}
-					event={event}
-					side={index % 7 === 2 ? 'left' : 'right'}
-				/>
+				<div className='flex'>
+					<EventWithText
+						key={index}
+						event={event}
+						side={index % 2 === 0 ? 'left' : 'right'}
+					/>
+				</div>
 			))}
 			<div className='min-h-[155px]' />
 			<div ref={divref} />
