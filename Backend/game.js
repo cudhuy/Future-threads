@@ -53,6 +53,7 @@ class GameManagerClass {
 		this.events = events;
 		this.cards = cards;
 		this.pastEvents = [];
+		this.gameEnded = false;
 		this.stats = {
 			economy: 50,
 			environment: 50,
@@ -86,6 +87,10 @@ class GameManagerClass {
 
 	// This function returns a list of new events based on the current stats and year.
 	getNewEvents() {
+		if (this.gameEnded) {
+			return [];
+		}
+
 		let possibleEvents = [];
 		for (let event of Object.values(this.events)) {
 			let probability = this.getEventProbability(event);
@@ -98,7 +103,7 @@ class GameManagerClass {
 
 		let selectedEvents = [];
 		let i = 0;
-		let max_events = random_int(0,2);
+		let max_events = random_int(0, 4);
 		while (i < max_events && possibleEvents.length > 0) {
 			let new_event_index = weighted_random_choice(possibleEvents);
 			if (new_event_index !== -1) {
@@ -127,6 +132,15 @@ class GameManagerClass {
 			}
 			statChanges.push({ ...this.stats });
 			this.pastEvents.push(event);
+			if (typeof event['gameEnds'] !== 'undefined') {
+				if (event['gameEnds']) {
+					this.gameEnded = true;
+					console.log(
+						'TEHFIAH OIHF FUCKING GAME ENDENDIENDE NOW GO GUFK OYOUR SELF',
+					);
+					return statChanges;
+				}
+			}
 		}
 		return statChanges;
 	}
@@ -147,6 +161,11 @@ class GameManagerClass {
 	}
 
 	getNewCards() {
+		console.log('new turn, game is ended: ', this.gameEnded);
+		if (this.gameEnded) {
+			return [];
+		}
+
 		let cards = [...this.cards];
 		let selectedCards = [];
 		for (let i = 0; i < 3; i++) {
@@ -200,6 +219,7 @@ class GameManagerClass {
 		this.pastEvents = data.past_events;
 		this.stats = data.stats;
 		this.currentYear = data.currentYear;
+		this.gameEnded = data.gameEnded;
 	}
 
 	toJSON() {
@@ -207,6 +227,7 @@ class GameManagerClass {
 			past_events: this.pastEvents,
 			stats: this.stats,
 			currentYear: this.currentYear,
+			gameEnded: this.gameEnded,
 		});
 	}
 }
