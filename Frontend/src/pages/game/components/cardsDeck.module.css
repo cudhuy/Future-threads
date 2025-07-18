@@ -5,18 +5,18 @@
 	right: 0;
 	display: flex;
 	justify-content: center;
-  }
-  
-  .cardsDeck {
+}
+
+.cardsDeck {
 	display: flex;
 	gap: 20px;
 	max-width: 900px;
 	padding: 0 20px;
 	justify-content: center;
 	flex-wrap: wrap;
-  }
-  
-  .card {
+}
+
+.card {
 	background: #252545;
 	border-radius: 12px;
 	padding: 20px;
@@ -27,54 +27,53 @@
 	border: 2px solid transparent;
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
 	transform: translateY(-5px);
 	border-color: #6a5acd;
 	box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
-  }
-  
-  .selected {
+}
+
+.selected {
 	border-color: #ff6b6b;
 	box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
-  }
-  
-  .fadeOut {
+}
+
+.fadeOut {
 	opacity: 0.3;
 	filter: grayscale(80%);
 	transform: scale(0.95);
-  }
-  
-  .card h3 {
+}
+
+.card h3 {
 	margin-top: 0;
 	color: #f0f0f0;
-  }
-  
-  .card p {
+}
+
+.card p {
 	color: #ccc;
 	flex-grow: 1;
-  }
-  
-  .cardEffects {
+}
+
+.cardEffects {
 	margin-top: auto;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
-  }
-  
-  .effect {
+}
+
+.effect {
 	font-size: 12px;
 	padding: 4px 8px;
 	border-radius: 6px;
 	background: rgba(0, 0, 0, 0.3);
-  }
-  
-  .positive {
+}
+
+.positive {
 	color: #51cf66;
-  }
-  
-  .negative {
+}
+
+.negative {
 	color: #ff6b6b;
-  }
-  
+}

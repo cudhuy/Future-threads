@@ -150,7 +150,7 @@ const AddEventForm = () => {
 					/>
 					{errors.description && (
 						<p className='text-red-500 mt-1'>{errors.description}</p>
-					)} 
+					)}
 				</div>
 				{/* Image Upload */}
 				<div>
