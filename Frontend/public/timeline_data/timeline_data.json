@@ -16,7 +16,9 @@
 		"statEffects": {
 			"qualityOfLife": { "change": 10, "range": 5 },
 			"economy": { "change": -5, "range": -2 }
-		}
+		},
+		"eventRequirements": ["Moon Colony"],
+		"cardRequirements": []
 	},
 	"1": {
 		"title": "Humans return to the Moon",
@@ -33,7 +35,9 @@
 		},
 		"statEffects": {
 			"qualityOfLife": { "change": 2, "range": 1 },
-			"economy": { "change": 1, "range": 1 }
+			"economy": { "change": 1, "range": 1 },
+			"eventRequirements": [],
+			"cardRequirements": []
 		}
 	},
 	"2": {
@@ -52,10 +56,12 @@
 		"statEffects": {
 			"qualityOfLife": { "change": 3, "range": 1 },
 			"economy": { "change": 4, "range": 2 }
-		}
+		},
+		"eventRequirements": ["Humans return to the Moon"],
+		"cardRequirements": []
 	},
 	"3": {
-		"title": "First AGI",
+		"title": "AGI Created",
 		"description": "AGI refers to a type of artificial intelligence capable of performing any intellectual task that a human can do, with the ability to learn, adapt, and generalize across a wide range of activities.",
 		"image": "first_AGI.webp",
 		"source": "",
@@ -70,7 +76,9 @@
 		"statEffects": {
 			"qualityOfLife": { "change": 10, "range": 5 },
 			"economy": { "change": 8, "range": 5 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"4": {
 		"title": "Commercially Viable Fusion Power",
@@ -88,7 +96,9 @@
 		"statEffects": {
 			"qualityOfLife": { "change": 6, "range": 3 },
 			"economy": { "change": 7, "range": 4 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"5": {
 		"title": "Cure for Cancer",
@@ -106,7 +116,9 @@
 		"statEffects": {
 			"qualityOfLife": { "change": 12, "range": 6 },
 			"economy": { "change": 3, "range": 2 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"6": {
 		"title": "Exceed 2\u00b0C",
@@ -124,7 +136,9 @@
 		"statEffects": {
 			"qualityOfLife": { "change": -9, "range": 4 },
 			"economy": { "change": -7, "range": 3 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"7": {
 		"title": "Asteroid Apophis Near-Earth Flyby",
@@ -143,10 +157,12 @@
 		"statEffects": {
 			"qualityOfLife": { "change": 10, "range": 5 },
 			"economy": { "change": 5, "range": 2 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"8": {
-		"title": "First Climate Refugee Crisis",
+		"title": "Climate Refugee Crisis",
 		"description": "As climate change accelerates, certain regions may become uninhabitable due to flooding, heatwaves, or desertification, displacing millions.",
 		"image": "climate_refugees.jpg",
 		"source": ["https://www.unhcr.org/en-us/climate-change-and-displacement"],
@@ -164,7 +180,9 @@
 			"qualityOfLife": { "change": -15, "range": 5 },
 			"economy": { "change": -10, "range": 3 },
 			"environment": { "change": 20, "range": 10 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"9": {
 		"title": "AI Replaces 50% of Jobs",
@@ -184,10 +202,12 @@
 		"statEffects": {
 			"economy": { "change": -15, "range": 5 },
 			"qualityOfLife": { "change": -10, "range": 3 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"10": {
-		"title": "First Use of Autonomous AI in Warfare",
+		"title": "Use of Autonomous AI in Warfare",
 		"description": "A military force deploys AI-controlled autonomous weapons capable of independently selecting and engaging targets without human oversight.",
 		"image": "ai_warfare.jpg",
 		"source": ["https://www.un.org/en/artificial-intelligence/weaponization"],
@@ -203,7 +223,9 @@
 		"statEffects": {
 			"military": { "change": 15, "range": 5 },
 			"qualityOfLife": { "change": -10, "range": 4 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"11": {
 		"title": "Limited Nuclear Conflict",
@@ -224,7 +246,9 @@
 			"environment": { "change": -30, "range": 10 },
 			"military": { "change": 20, "range": 5 },
 			"qualityOfLife": { "change": -20, "range": 8 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"12": {
 		"title": "Global Ban on Autonomous Weapons",
@@ -238,16 +262,15 @@
 		"tags": ["Politics", "AI", "Social"],
 		"baseProbability": 7,
 		"statRanges": {
-			"politics": { "min": 30, "max": 70, "probabilitySwing": 1 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 10, "max": 50, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 40, "probabilitySwing": -1 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"politics": { "min": 60, "max": 100, "probabilitySwing": 1 },
+			"economy": { "min": 40, "max": 100, "probabilitySwing": 0 }
 		},
 		"statEffects": {
 			"politics": { "change": 10, "range": 5 },
 			"economy": { "change": 5, "range": 2 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"13": {
 		"title": "World War III Scenario Avoided",
@@ -261,16 +284,16 @@
 		"tags": ["Politics", "Social"],
 		"baseProbability": 4,
 		"statRanges": {
-			"politics": { "min": 40, "max": 90, "probabilitySwing": 1 },
+			"politics": { "min": 40, "max": 100, "probabilitySwing": 1 },
 			"economy": { "min": 30, "max": 60, "probabilitySwing": 0 },
-			"environment": { "min": 20, "max": 50, "probabilitySwing": 0 },
-			"military": { "min": 20, "max": 50, "probabilitySwing": -1 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"military": { "min": 40, "max": 100, "probabilitySwing": -1 }
 		},
 		"statEffects": {
 			"politics": { "change": 10, "range": 5 },
 			"qualityOfLife": { "change": 15, "range": 8 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"14": {
 		"title": "Treaty to Eliminate All Nuclear Weapons",
@@ -283,15 +306,14 @@
 		"baseProbability": 5,
 		"statRanges": {
 			"politics": { "min": 60, "max": 100, "probabilitySwing": 1 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 50, "max": 100, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": -1 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 }
 		},
 		"statEffects": {
 			"politics": { "change": 15, "range": 8 },
 			"environment": { "change": 20, "range": 10 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"15": {
 		"title": "Cyber War Causes Infrastructure Collapse",
@@ -304,18 +326,18 @@
 		"baseProbability": 6,
 		"statRanges": {
 			"politics": { "min": 30, "max": 70, "probabilitySwing": -1 },
-			"economy": { "min": 20, "max": 60, "probabilitySwing": -1 },
-			"environment": { "min": 10, "max": 40, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 20, "max": 50, "probabilitySwing": -1 }
+			"economy": { "min": 20, "max": 100, "probabilitySwing": 1 },
+			"military": { "min": 50, "max": 100, "probabilitySwing": 0 }
 		},
 		"statEffects": {
 			"economy": { "change": -15, "range": -5 },
 			"qualityOfLife": { "change": -20, "range": -8 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"16": {
-		"title": "First Orbital Military Engagement",
+		"title": "Orbital Military Engagement",
 		"description": "Two or more spacefaring nations engage in hostile actions in Earth orbit, targeting satellites or other space assets, marking the start of space warfare.",
 		"image": "space_warfare.jpg",
 		"source": [
@@ -326,16 +348,16 @@
 		"tags": ["Space", "Politics", "Science"],
 		"baseProbability": 4,
 		"statRanges": {
-			"politics": { "min": 30, "max": 70, "probabilitySwing": -1 },
-			"economy": { "min": 20, "max": 50, "probabilitySwing": 0 },
-			"environment": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"military": { "min": 50, "max": 90, "probabilitySwing": 1 },
-			"qualityOfLife": { "min": 10, "max": 40, "probabilitySwing": -1 }
+			"politics": { "min": 0, "max": 70, "probabilitySwing": -1 },
+			"economy": { "min": 50, "max": 100, "probabilitySwing": 1 },
+			"military": { "min": 60, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"military": { "change": 20, "range": 8 },
 			"qualityOfLife": { "change": -15, "range": -5 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"17": {
 		"title": "Room-Temperature Superconductors",
@@ -347,16 +369,15 @@
 		"tags": ["Science"],
 		"baseProbability": 7,
 		"statRanges": {
-			"politics": { "min": 20, "max": 50, "probabilitySwing": 1 },
-			"economy": { "min": 30, "max": 80, "probabilitySwing": 1 },
-			"environment": { "min": 10, "max": 40, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"economy": { "min": 30, "max": 100, "probabilitySwing": 1 },
+			"military": { "min": 10, "max": 80, "probabilitySwing": 0 }
 		},
 		"statEffects": {
 			"economy": { "change": 20, "range": 10 },
 			"qualityOfLife": { "change": 15, "range": 6 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"18": {
 		"title": "Longevity Therapies Become Mainstream",
@@ -368,16 +389,15 @@
 		"tags": ["Medicine", "Science"],
 		"baseProbability": 6,
 		"statRanges": {
-			"politics": { "min": 40, "max": 80, "probabilitySwing": 0 },
-			"economy": { "min": 50, "max": 90, "probabilitySwing": 1 },
-			"environment": { "min": 10, "max": 50, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 70, "max": 100, "probabilitySwing": 1 }
+			"politics": { "min": 40, "max": 100, "probabilitySwing": 0 },
+			"economy": { "min": 50, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"qualityOfLife": { "change": 25, "range": 10 },
 			"economy": { "change": 15, "range": 5 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"19": {
 		"title": "First Human Brain Emulation",
@@ -390,15 +410,14 @@
 		"baseProbability": 4,
 		"statRanges": {
 			"politics": { "min": 30, "max": 70, "probabilitySwing": 0 },
-			"economy": { "min": 40, "max": 80, "probabilitySwing": 1 },
-			"environment": { "min": 10, "max": 40, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"economy": { "min": 40, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 15, "range": 6 },
 			"qualityOfLife": { "change": 20, "range": 8 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"20": {
 		"title": "Universal Antiviral Drug Created",
@@ -412,16 +431,15 @@
 		"tags": ["Medicine", "Science"],
 		"baseProbability": 4,
 		"statRanges": {
-			"politics": { "min": 20, "max": 60, "probabilitySwing": 1 },
-			"economy": { "min": 30, "max": 70, "probabilitySwing": 1 },
-			"environment": { "min": 40, "max": 80, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
+			"economy": { "min": 30, "max": 100, "probabilitySwing": 1 },
 			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 10, "range": 4 },
 			"qualityOfLife": { "change": 15, "range": 5 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"21": {
 		"title": "CRISPR-Based Genetic Disease Elimination",
@@ -433,16 +451,14 @@
 		"tags": ["Medicine", "Science"],
 		"baseProbability": 5,
 		"statRanges": {
-			"politics": { "min": 40, "max": 80, "probabilitySwing": 1 },
-			"economy": { "min": 50, "max": 90, "probabilitySwing": 1 },
-			"environment": { "min": 10, "max": 40, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 70, "max": 100, "probabilitySwing": 1 }
+			"economy": { "min": 50, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 20, "range": 8 },
 			"qualityOfLife": { "change": 25, "range": 10 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"22": {
 		"title": "Discovery of New Physics Beyond the Standard Model",
@@ -454,13 +470,15 @@
 		"tags": ["Science"],
 		"baseProbability": 3,
 		"statRanges": {
-			"politics": { "min": 30, "max": 60, "probabilitySwing": 0 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 20, "max": 50, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"politics": { "min": 30, "max": 80, "probabilitySwing": 0 },
+			"economy": { "min": 40, "max": 100, "probabilitySwing": 0 }
 		},
-		"statEffects": { "qualityOfLife": { "change": 10, "range": 4 } }
+		"statEffects": {
+			"qualityOfLife": { "change": 10, "range": 4 },
+			"economy": { "change": 6, "range": 3 }
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"23": {
 		"title": "Artificial Photosynthesis for Energy",
@@ -472,16 +490,15 @@
 		"tags": ["Science", "Environment"],
 		"baseProbability": 4,
 		"statRanges": {
-			"politics": { "min": 20, "max": 50, "probabilitySwing": 1 },
-			"economy": { "min": 30, "max": 70, "probabilitySwing": 1 },
-			"environment": { "min": 60, "max": 100, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 50, "max": 90, "probabilitySwing": 1 }
+			"politics": { "min": 20, "max": 100, "probabilitySwing": 1 },
+			"environment": { "min": 60, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 12, "range": 5 },
 			"environment": { "change": 20, "range": 8 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"24": {
 		"title": "Global Climate Migration Crisis",
@@ -495,16 +512,16 @@
 		"tags": ["Environment", "Politics", "Social"],
 		"baseProbability": 7,
 		"statRanges": {
-			"politics": { "min": 50, "max": 80, "probabilitySwing": -1 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 60, "max": 100, "probabilitySwing": -1 },
-			"military": { "min": 30, "max": 60, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 20, "max": 50, "probabilitySwing": -1 }
+			"politics": { "min": 0, "max": 60, "probabilitySwing": -1 },
+			"environment": { "min": 0, "max": 30, "probabilitySwing": -1 },
+			"qualityOfLife": { "min": 0, "max": 50, "probabilitySwing": -1 }
 		},
 		"statEffects": {
 			"environment": { "change": -25, "range": -10 },
 			"qualityOfLife": { "change": -30, "range": -12 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"25": {
 		"title": "Global Carbon Neutrality Achieved",
@@ -516,16 +533,16 @@
 		"tags": ["Environment", "Politics"],
 		"baseProbability": 8,
 		"statRanges": {
-			"politics": { "min": 50, "max": 90, "probabilitySwing": 1 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 1 },
-			"environment": { "min": 70, "max": 100, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 60, "max": 100, "probabilitySwing": 1 }
+			"politics": { "min": 50, "max": 100, "probabilitySwing": 1 },
+			"economy": { "min": 40, "max": 100, "probabilitySwing": 1 },
+			"environment": { "min": 70, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 12, "range": 5 },
 			"environment": { "change": 18, "range": 7 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"26": {
 		"title": "Greenhouse Gas Removal at Scale",
@@ -537,16 +554,16 @@
 		"tags": ["Environment", "Science"],
 		"baseProbability": 7,
 		"statRanges": {
-			"politics": { "min": 40, "max": 80, "probabilitySwing": 1 },
-			"economy": { "min": 50, "max": 80, "probabilitySwing": 1 },
-			"environment": { "min": 60, "max": 100, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 50, "max": 90, "probabilitySwing": 1 }
+			"politics": { "min": 40, "max": 100, "probabilitySwing": 1 },
+			"economy": { "min": 60, "max": 100, "probabilitySwing": 1 },
+			"environment": { "min": 60, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 10, "range": 4 },
 			"environment": { "change": 15, "range": 6 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"27": {
 		"title": "Geoengineering Deployed to Cool Earth",
@@ -558,13 +575,13 @@
 		"tags": ["Environment", "Science", "Politics"],
 		"baseProbability": 6,
 		"statRanges": {
-			"politics": { "min": 30, "max": 70, "probabilitySwing": 0 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 50, "max": 100, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 40, "max": 70, "probabilitySwing": 0 }
+			"politics": { "min": 30, "max": 80, "probabilitySwing": 0 },
+			"economy": { "min": 40, "max": 90, "probabilitySwing": 0 },
+			"environment": { "min": 30, "max": 70, "probabilitySwing": 0 }
 		},
-		"statEffects": { "environment": { "change": 12, "range": 5 } }
+		"statEffects": { "environment": { "change": 12, "range": 5 } },
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"28": {
 		"title": "Major Ocean Current Disruption",
@@ -576,16 +593,14 @@
 		"tags": ["Environment", "Natural Disaster"],
 		"baseProbability": 9,
 		"statRanges": {
-			"politics": { "min": 50, "max": 80, "probabilitySwing": -1 },
-			"economy": { "min": 30, "max": 60, "probabilitySwing": -1 },
-			"environment": { "min": 70, "max": 100, "probabilitySwing": -1 },
-			"military": { "min": 20, "max": 50, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 10, "max": 40, "probabilitySwing": -1 }
+			"environment": { "min": 0, "max": 40, "probabilitySwing": -1 }
 		},
 		"statEffects": {
 			"economy": { "change": -15, "range": -6 },
 			"environment": { "change": -25, "range": -10 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"29": {
 		"title": "Global Treaty on Climate Justice",
@@ -599,16 +614,16 @@
 		"tags": ["Environment", "Politics", "Social"],
 		"baseProbability": 5,
 		"statRanges": {
-			"politics": { "min": 40, "max": 80, "probabilitySwing": 1 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 50, "max": 90, "probabilitySwing": 1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 50, "max": 90, "probabilitySwing": 1 }
+			"politics": { "min": 70, "max": 100, "probabilitySwing": 1 },
+			"economy": { "min": 40, "max": 100, "probabilitySwing": 0 },
+			"environment": { "min": 30, "max": 100, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"economy": { "change": 10, "range": 4 },
-			"environment": { "change": 12, "range": 5 }
-		}
+			"environment": { "change": 20, "range": 5 }
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"30": {
 		"title": "Global Coral Reef Collapse",
@@ -620,16 +635,14 @@
 		"tags": ["Environment", "Natural Disaster"],
 		"baseProbability": 8,
 		"statRanges": {
-			"politics": { "min": 40, "max": 70, "probabilitySwing": -1 },
-			"economy": { "min": 30, "max": 60, "probabilitySwing": -1 },
-			"environment": { "min": 70, "max": 100, "probabilitySwing": -1 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 10, "max": 40, "probabilitySwing": -1 }
+			"environment": { "min": 0, "max": 40, "probabilitySwing": -1 }
 		},
 		"statEffects": {
 			"economy": { "change": -18, "range": -7 },
 			"environment": { "change": -30, "range": -12 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"31": {
 		"title": "Regional Election Shifts Populist",
@@ -642,15 +655,12 @@
 		"baseProbability": 6,
 		"statRanges": {
 			"politics": { "min": 40, "max": 80, "probabilitySwing": -1 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 0 },
-			"environment": { "min": 30, "max": 60, "probabilitySwing": 0 },
-			"military": { "min": 40, "max": 70, "probabilitySwing": -1 },
 			"qualityOfLife": { "min": 40, "max": 70, "probabilitySwing": 0 }
 		},
 		"statEffects": { "politics": { "change": -5, "range": -3 } }
 	},
 	"32": {
-		"title": "Minor Global Virus Outbreak",
+		"title": "Minor Virus Outbreak",
 		"description": "A novel virus emerges but is quickly contained through local quarantines and rapid medical response, with limited global spread.",
 		"image": "minor_outbreak.jpg",
 		"source": ["https://www.who.int/"],
@@ -659,16 +669,15 @@
 		"tags": ["Medicine", "Social"],
 		"baseProbability": 7,
 		"statRanges": {
-			"politics": { "min": 30, "max": 60, "probabilitySwing": 0 },
-			"economy": { "min": 20, "max": 50, "probabilitySwing": -1 },
-			"environment": { "min": 30, "max": 50, "probabilitySwing": 0 },
-			"military": { "min": 10, "max": 30, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 20, "max": 60, "probabilitySwing": -1 }
+			"environment": { "min": 20, "max": 80, "probabilitySwing": 0 },
+			"qualityOfLife": { "min": 0, "max": 60, "probabilitySwing": -1 }
 		},
 		"statEffects": {
 			"qualityOfLife": { "change": -6, "range": -2 },
 			"economy": { "change": -4, "range": -1 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"33": {
 		"title": "Urban Riots in Major City",
@@ -680,13 +689,13 @@
 		"tags": ["Social", "Politics"],
 		"baseProbability": 7,
 		"statRanges": {
-			"politics": { "min": 40, "max": 80, "probabilitySwing": -1 },
-			"economy": { "min": 30, "max": 60, "probabilitySwing": -1 },
-			"environment": { "min": 20, "max": 40, "probabilitySwing": 0 },
-			"military": { "min": 50, "max": 80, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 20, "max": 60, "probabilitySwing": -1 }
+			"politics": { "min": 0, "max": 80, "probabilitySwing": -1 },
+			"economy": { "min": 0, "max": 60, "probabilitySwing": -1 },
+			"qualityOfLife": { "min": 0, "max": 40, "probabilitySwing": -1 }
 		},
-		"statEffects": { "qualityOfLife": { "change": -7, "range": -3 } }
+		"statEffects": { "qualityOfLife": { "change": -7, "range": -3 } },
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"34": {
 		"title": "Breakthrough in Battery Recycling",
@@ -698,16 +707,15 @@
 		"tags": ["Science", "Environment", "Technology"],
 		"baseProbability": 8,
 		"statRanges": {
-			"politics": { "min": 30, "max": 50, "probabilitySwing": 0 },
-			"economy": { "min": 40, "max": 70, "probabilitySwing": 1 },
-			"environment": { "min": 50, "max": 80, "probabilitySwing": 1 },
-			"military": { "min": 20, "max": 40, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 30, "max": 60, "probabilitySwing": 1 }
+			"economy": { "min": 40, "max": 80, "probabilitySwing": 1 },
+			"environment": { "min": 40, "max": 80, "probabilitySwing": 1 }
 		},
 		"statEffects": {
 			"environment": { "change": 6, "range": 2 },
 			"economy": { "change": 5, "range": 2 }
-		}
+		},
+		"eventRequirements": [],
+		"cardRequirements": []
 	},
 	"35": {
 		"title": "Low-Earth Orbit Traffic Regulations Enacted",
@@ -719,12 +727,91 @@
 		"tags": ["Technology", "Politics", "Environment"],
 		"baseProbability": 6,
 		"statRanges": {
-			"politics": { "min": 50, "max": 80, "probabilitySwing": 1 },
-			"economy": { "min": 30, "max": 60, "probabilitySwing": 0 },
-			"environment": { "min": 40, "max": 70, "probabilitySwing": 1 },
-			"military": { "min": 30, "max": 50, "probabilitySwing": 0 },
-			"qualityOfLife": { "min": 20, "max": 50, "probabilitySwing": 0 }
+			"politics": { "min": 40, "max": 100, "probabilitySwing": 1 },
+			"economy": { "min": 20, "max": 60, "probabilitySwing": 0 },
+			"military": { "min": 20, "max": 80, "probabilitySwing": 0 }
 		},
-		"statEffects": { "environment": { "change": 4, "range": 1 } }
+		"statEffects": { "environment": { "change": 4, "range": 1 } },
+		"eventRequirements": [],
+		"cardRequirements": []
+	},
+	"36": {
+		"title": "Complete Economic Collapse",
+		"description": "Everyone runs out of money, the world falls apart, everyone dies.",
+		"image": "economic_collapse.jpg",
+		"source": "",
+		"dateRange": { "earliestYear": 2027, "latestYear": 2040 },
+		"isPositive": false,
+		"gameEnds": true,
+		"tags": ["Politics"],
+		"baseProbability": 1000,
+		"statRanges": { "economy": { "min": 0, "max": 1, "probabilitySwing": 0 } },
+		"statEffects": {},
+		"eventRequirements": [],
+		"cardRequirements": []
+	},
+	"37": {
+		"title": "Complete Environmental Collapse",
+		"description": "Climate change creates storms so violent all man made structures are destroid, taking the humans inside with them.",
+		"image": "environmental_collapse.webp",
+		"source": "",
+		"dateRange": { "earliestYear": 2027, "latestYear": 2040 },
+		"isPositive": false,
+		"gameEnds": true,
+		"tags": ["Politics"],
+		"baseProbability": 1000,
+		"statRanges": {
+			"environment": { "min": 0, "max": 1, "probabilitySwing": 0 }
+		},
+		"statEffects": {},
+		"eventRequirements": [],
+		"cardRequirements": []
+	},
+	"38": {
+		"title": "Complete Military Collapse",
+		"description": "Humanity loses all its military and therefore its ability to defend itself, the pigeons use their limited, yet surprisingly powerful military skills to wipe out humanity.",
+		"image": "military_collapse.jpg",
+		"source": "",
+		"dateRange": { "earliestYear": 2027, "latestYear": 2040 },
+		"gameEnds": true,
+		"isPositive": false,
+		"tags": ["Politics"],
+		"baseProbability": 1000,
+		"statRanges": { "military": { "min": 0, "max": 1, "probabilitySwing": 0 } },
+		"statEffects": {},
+		"eventRequirements": [],
+		"cardRequirements": []
+	},
+	"39": {
+		"title": "Complete Loss of Quality of Life",
+		"description": "Literally everyone is severely depressed and lacking purpose or meaning, a pandemic of suicide wipes out humanity",
+		"image": "quality_of_life_collapse.jpg",
+		"source": "",
+		"dateRange": { "earliestYear": 2027, "latestYear": 2040 },
+		"isPositive": false,
+		"gameEnds": true,
+		"tags": ["Politics"],
+		"baseProbability": 1000,
+		"statRanges": {
+			"qualityOfLife": { "min": 0, "max": 1, "probabilitySwing": 0 }
+		},
+		"statEffects": {},
+		"eventRequirements": [],
+		"cardRequirements": []
+	},
+	"40": {
+		"title": "Complete Political Collapse",
+		"description": "Governments lose control of their people, everyone kills each other.",
+		"image": "political_collapse.jpg",
+		"source": "",
+		"dateRange": { "earliestYear": 2027, "latestYear": 2040 },
+		"isPositive": false,
+		"gameEnds": true,
+		"tags": ["Politics"],
+		"baseProbability": 1000,
+		"statRanges": { "politics": { "min": 0, "max": 1, "probabilitySwing": 0 } },
+		"statEffects": {},
+		"eventRequirements": [],
+		"cardRequirements": []
 	}
 }
