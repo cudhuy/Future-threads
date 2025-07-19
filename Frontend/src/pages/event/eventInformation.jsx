@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-// Fetches and displays information about a specific event
 const EventInformation = () => {
 	const { info } = useParams();
 	const [messages, setMessages] = useState([]);
+	const [loading, setLoading] = useState(false); // State to track if AI is generating
 
 	const handleSendMessage = async () => {
 		if (!info?.trim()) return;
 
 		const event_info = JSON.parse(decodeURI(info));
+		setLoading(true); // Set loading to true when starting to fetch data
 
 		try {
 			const response = await axios.post('http://localhost:5000/api/chat', {
@@ -25,6 +26,8 @@ const EventInformation = () => {
 				...prev,
 				{ role: 'assistant', content: 'Something went wrong. Try again!' },
 			]);
+		} finally {
+			setLoading(false); // Set loading to false once the response is received
 		}
 	};
 
@@ -40,11 +43,24 @@ const EventInformation = () => {
 			<h1 className='text-4xl mb-4'>
 				Event - {JSON.parse(decodeURI(info)).title}
 			</h1>
-			<ul className='text-lg space-y-2'>
-				{messages.map((message, index) => (
-					<li key={index}>{message.content}</li>
-				))}
-			</ul>
+
+			{/* Show the loading spinner if loading is true */}
+			{loading ? (
+				<div className='flex justify-center items-center'>
+					<div
+						className='spinner-border animate-spin inline-block w-8 h-8 border-4 border-solid border-blue-400 border-t-transparent rounded-full'
+						role='status'
+					>
+						<span className='visually-hidden'>Loading...</span>
+					</div>
+				</div>
+			) : (
+				<ul className='text-lg space-y-2'>
+					{messages.map((message, index) => (
+						<li key={index}>{message.content}</li>
+					))}
+				</ul>
+			)}
 		</div>
 	);
 };

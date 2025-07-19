@@ -6,6 +6,7 @@ import Layout from './pages/layout';
 import NoPage from './pages/nopage/noPage';
 import GameUI from './pages/game/gameUI';
 import AddEventForm from './pages/newevent/eventAdd';
+import GameEnd from './pages/gameend/gameEnd';
 
 function App() {
 	return (
@@ -17,8 +18,8 @@ function App() {
 					<Route path='newEvent' element={<AddEventForm />} />
 					<Route path='newCard' element={<Test />} />
 					<Route path='timeline' element={<TimeLine />} />
-
 					<Route path='game' element={<GameUI />} />
+					<Route path='gameEnd' element={<GameEnd />} />
 					<Route
 						path='*'
 						element={<NoPage onclick={() => window.history.back()} />}
