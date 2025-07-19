@@ -1,31 +1,40 @@
-// Provided title, description
+// provided title, description
 
-// What format / easiest to play
+// what format / easiest to play
 
 const fs = require('fs');
 const { createClient, toWav } = require('@neuphonic/neuphonic-js');
 const dotenv = require('dotenv');
 const path = require('path');
 
+const choiceData = require('../public/timeline_data/choices.json');
+
 dotenv.config();
 
 const client = createClient({ apiKey: process.env.NEUPHONICS_API });
+
 const outputDir = 'voiceFiles';
 
-// Returns a description string based on the provided title
 function descriptionFromTitle(title) {
-	const testDescriptions = {
-		meow: 'Cats!!!!',
-		beep: 'BEEEEEEEEEEEEEEES!',
-		ship: 'beep beep the ship cargo space? car no go space, car go road',
-	};
-	return testDescriptions[title];
+	/* const testDescriptions = {meow: "Cats!!!!", beep: "BEEEEEEEEEEEEEEES!", ship: "beep beep the ship cargo space? car no go space, car go road"}
+	return testDescriptions[title] */
+	console.log(
+		choiceData.filter((val) => {
+			return val.title === title;
+		})[0]['description'],
+	);
+	return (
+		title +
+		': ' +
+		choiceData.filter((val) => {
+			return val.title === title;
+		})[0]['description']
+	);
 }
 
-// Generates speech audio (wav) from a text description using Neuphonic API
 async function generateText(description) {
 	const sse = await client.tts.sse({
-		speed: 1.15,
+		speed: 1,
 		lang_code: 'en',
 	});
 
@@ -35,7 +44,6 @@ async function generateText(description) {
 	return toWav(res.audio);
 }
 
-// Gets the audio file path for a given title, generates and saves the audio if it doesn't exist
 async function getAudioPath(title) {
 	if (fs.existsSync(outputDir + `/${title}.wav`)) {
 		// exists already
