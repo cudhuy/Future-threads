@@ -104,6 +104,7 @@ class GameManagerClass {
 		let selectedEvents = [];
 		let i = 0;
 		let max_events = random_int(0, 4);
+		console.log('possible events', possibleEvents);
 		while (i < max_events && possibleEvents.length > 0) {
 			let new_event_index = weighted_random_choice(possibleEvents);
 			if (new_event_index !== -1) {
@@ -135,9 +136,6 @@ class GameManagerClass {
 			if (typeof event['gameEnds'] !== 'undefined') {
 				if (event['gameEnds']) {
 					this.gameEnded = true;
-					console.log(
-						'TEHFIAH OIHF FUCKING GAME ENDENDIENDE NOW GO GUFK OYOUR SELF',
-					);
 					return statChanges;
 				}
 			}
@@ -152,16 +150,10 @@ class GameManagerClass {
 				0,
 				100,
 			);
-			this.stats[stat] = clamp(
-				this.stats[stat] + card['effects'][stat],
-				0,
-				100,
-			);
 		}
 	}
 
 	getNewCards() {
-		console.log('new turn, game is ended: ', this.gameEnded);
 		if (this.gameEnded) {
 			return [];
 		}
@@ -198,7 +190,7 @@ class GameManagerClass {
 			event['dateRange']['earliestYear'] < this.currentYear ||
 			event['dateRange']['latestYear'] > this.currentYear
 		) {
-			// return 0;
+			//return 0
 		}
 		let probability = event['baseProbability'];
 		for (let stat of Object.keys(event['statRanges'])) {
