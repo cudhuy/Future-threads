@@ -94,7 +94,7 @@ function GameUI() {
 		}
 		getData();
 	};
-	
+
 	return (
 		<div className='game-container'>
 			<h1 className='text-4xl text-center'>{'Current Year is ' + year}</h1>
@@ -110,12 +110,12 @@ function GameUI() {
 				</>
 			)}
 
-			{
+			{/* {
 				<RandomEventPopup
 					event={randomEvent}
 					onClose={() => setRandomEvent(null)}
 				/>
-			}
+			} */}
 		</div>
 	);
 }

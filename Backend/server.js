@@ -6,6 +6,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const session = require('express-session');
 const path = require('path');
 const fs = require('fs').promises;
+const GameManagerClass = require('./game');
 const getAudioPath = require('./voiceGen');
 
 // Load environment variables from .env file
@@ -62,7 +63,7 @@ let gameManager = null;
 const getEvents = async () => {
 	try {
 		const fileData = await fs.readFile(
-			'../public/Frontend/timeline_data/timeline_data.json',
+			'../Frontend/public/timeline_data/timeline_data.json',
 			'utf8',
 		);
 		eventData = JSON.parse(fileData);
@@ -76,7 +77,7 @@ const getEvents = async () => {
 const getChoices = async () => {
 	try {
 		const fileData = await fs.readFile(
-			'../public/Frontend/timeline_data/choices.json',
+			'../Frontend/public/timeline_data/choices.json',
 			'utf8',
 		);
 		choiceData = JSON.parse(fileData);

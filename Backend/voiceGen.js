@@ -7,7 +7,7 @@ const { createClient, toWav } = require('@neuphonic/neuphonic-js');
 const dotenv = require('dotenv');
 const path = require('path');
 
-const choiceData = require('../public/timeline_data/choices.json');
+const choiceData = require('../Frontend/public/timeline_data/choices.json');
 
 dotenv.config();
 
